@@ -1987,7 +1987,7 @@ FROM rdb$database
                         времени (т.е. оно должно быть оценено при каждом вызове), используйте полный
                         синтаксис CAST.
                         <programlisting language="sql">  
-NEW.CHANGE_DATE = CAST('now' AS TIMESTANP);          
+NEW.CHANGE_DATE = CAST('now' AS TIMESTAMP);          
                </programlisting>
                     </para>
                 </note>
