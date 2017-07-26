@@ -393,7 +393,7 @@ INSERT INTO MYBIGINTS VALUES (
         <para>
             <table xml:id="table-store-fixed">
                 <?dbfo keep-together='auto'?>
-                <title>Способ физического хранения вещественных чисел</title>
+                <title>Способ физического хранения чисел с фиксированной точкой</title>
 
                 <tgroup cols="4">
                     <colspec colname="colScale" colwidth="2*" align="left"/>
@@ -2230,7 +2230,6 @@ CREATE DOMAIN <replaceable>&lt;name&gt;</replaceable> [AS] <replaceable>&lt;type
 
                 <para>
                     <programlisting>
-
 ALTER DOMAIN <replaceable>name</replaceable>
   [{TO <replaceable>new_name</replaceable>}]
   [{SET DEFAULT {<replaceable>literal</replaceable> | NULL | <replaceable>&lt;context_var&gt;</replaceable>} | 
