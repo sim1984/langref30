@@ -2181,14 +2181,18 @@ DROP USER Godzilla USING PLUGIN Legacy_UserManager;
             <formalpara>
                 <title>Синтаксис:</title>
 
-                <para><programlisting>                    
-<replaceable>&lt;grant_stmt&gt;</replaceable> ::=
-    { GRANT <replaceable>&lt;privileges&gt;</replaceable> 
-      TO {<replaceable>&lt;object_list&gt;</replaceable> | PUBLIC | <replaceable>&lt;user_list&gt;</replaceable> [WITH GRANT OPTION] } 
-      [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] }
-  | { GRANT <replaceable>&lt;role_granted&gt;</replaceable> 
-      TO {PUBLIC | <replaceable>&lt;role_grantee_list&gt;</replaceable> [WITH ADMIN OPTION]} 
-      [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] }
+                <para><programlisting>    
+<replaceable>&lt;grant_stmt&gt;</replaceable> ::= <replaceable>&lt;grant_priv_stmt&gt;</replaceable> | <replaceable>&lt;grant_roles_stmt&gt;</replaceable>                    
+                    
+<replaceable>&lt;grant_priv_stmt&gt;</replaceable> ::=
+  GRANT <replaceable>&lt;privileges&gt;</replaceable> 
+  TO {<replaceable>&lt;object_list&gt;</replaceable> | PUBLIC | <replaceable>&lt;user_list&gt;</replaceable> [WITH GRANT OPTION] } 
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] 
+                    
+<replaceable>&lt;grant_roles_stmt&gt;</replaceable> ::=                                        
+  GRANT <replaceable>&lt;role_granted&gt;</replaceable> 
+  TO {PUBLIC | <replaceable>&lt;role_grantee_list&gt;</replaceable> [WITH ADMIN OPTION]} 
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] 
 
 <replaceable>&lt;privileges&gt;</replaceable> ::= 
     <replaceable>&lt;table_privileges&gt;</replaceable>
@@ -2953,7 +2957,22 @@ GRANT DROP DATABASE TO USER Fedor;
             <section xml:id="security-priv-grant-role">
                 <title>Назначение ролей</title>
 
-                <para> Оператор GRANT может быть использован для назначения ролей для группы
+                <formalpara>
+                    <title>Синтаксис:</title>
+
+                    <para><programlisting>   
+<replaceable>&lt;grant_roles_stmt&gt;</replaceable> ::=                                        
+  GRANT <replaceable>&lt;role_granted&gt;</replaceable> 
+  TO {PUBLIC | <replaceable>&lt;role_grantee_list&gt;</replaceable> [WITH ADMIN OPTION]} 
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>]    
+                        
+<replaceable>&lt;role_granted&gt;</replaceable> ::= <replaceable>rolename</replaceable> [, <replaceable>rolename</replaceable> ...]  
+                        
+<replaceable>&lt;role_grantee_list&gt;</replaceable> ::= [USER] <replaceable>username</replaceable> [, [USER] <replaceable>username</replaceable> ...]                          
+</programlisting></para>
+                </formalpara>
+
+                <para>Оператор GRANT может быть использован для назначения ролей для группы
                     перечисленных пользователей. В этом случае после предложения GRANT следует
                     список ролей, которые будут назначены списку пользователей, указанному после
                     предложения TO. </para>
@@ -3015,16 +3034,29 @@ GRANT MANAGER TO USER ALEX WITH ADMIN OPTION;
             <formalpara>
                 <title>Синтаксис:</title>
 
-                <para><programlisting>                    
-<replaceable>&lt;revoke_stmt&gt;</replaceable> ::=
-    { REVOKE [GRANT OPTION FOR] <replaceable>&lt;privileges&gt;</replaceable> 
-      FROM {<replaceable>&lt;object_list&gt;</replaceable> | PUBLIC | <replaceable>&lt;user_list&gt;</replaceable> } 
-      [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] }
-  | { REVOKE [ADMIN OPTION FOR] <replaceable>&lt;role_granted&gt;</replaceable> 
-      FROM {PUBLIC | <replaceable>&lt;role_grantee_list&gt;</replaceable> } 
-      [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>] }
-  | { REVOKE ALL ON ALL FROM <replaceable>&lt;user_list&gt;</replaceable> }
-
+                <para><programlisting>    
+<replaceable>&lt;revoke_stmt&gt;</replaceable> ::= 
+    <replaceable>&lt;revoke_priv_stmt&gt;</replaceable> 
+  | <replaceable>&lt;revoke_role_stmt&gt;</replaceable> 
+  | <replaceable>&lt;revoke_all_stmt&gt;</replaceable>                    
+                  
+<replaceable>&lt;revoke_priv_stmt&gt;</replaceable> ::= 
+  REVOKE [GRANT OPTION FOR] <replaceable>&lt;privileges&gt;</replaceable> 
+  FROM {
+      <replaceable>&lt;object_list&gt;</replaceable> 
+    | PUBLIC  
+    | <replaceable>&lt;user_list&gt;</replaceable> } 
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>]                   
+                  
+<replaceable>&lt;revoke_role_stmt&gt;</replaceable> ::= 
+  REVOKE [ADMIN OPTION FOR] <replaceable>&lt;role_granted&gt;</replaceable> 
+  FROM {PUBLIC | <replaceable>&lt;role_grantee_list&gt;</replaceable> } 
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>]   
+                    
+<replaceable>&lt;revoke_all_stmt&gt;</replaceable> ::= 
+  REVOKE ALL ON ALL FROM <replaceable>&lt;user_list&gt;</replaceable>
+  [{GRANTED BY | AS} [USER] <replaceable>grantor</replaceable>]                     
+                  
 <replaceable>&lt;privileges&gt;</replaceable> ::= 
     <replaceable>&lt;table_privileges&gt;</replaceable>
   | <replaceable>&lt;execute_privileges&gt;</replaceable>
