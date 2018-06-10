@@ -6293,21 +6293,26 @@ FROM PRICE;
             <formalpara>
                 <title>Синтаксис:</title>
                 <para><programlisting>
-CREATE TRIGGER <replaceable>trigname</replaceable> {   
+CREATE TRIGGER <replaceable>trigname</replaceable> 
+{   
     <replaceable>&lt;relation_trigger_legacy&gt;</replaceable>
   | <replaceable>&lt;relation_trigger_sql2003&gt;</replaceable>
   | <replaceable>&lt;database_trigger&gt;</replaceable> 
-  | <replaceable>&lt;ddl_trigger&gt;</replaceable> }
-  {EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable>} |                   
-  {                    
-    AS
-      [<replaceable>&lt;declarations&gt;</replaceable>]
-    BEGIN
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]
-    END
-  } 
-  
+  | <replaceable>&lt;ddl_trigger&gt;</replaceable> 
+}
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END
+  
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
+  
 <replaceable>&lt;relation_trigger_legacy&gt;</replaceable> ::= 
   FOR {<replaceable>tablename</replaceable> | <replaceable>viewname</replaceable>}
   [ACTIVE | INACTIVE]
@@ -6461,6 +6466,15 @@ CREATE TRIGGER <replaceable>trigname</replaceable> {
                                 </entry>
                             </row>
                             <row>
+                                <entry><replaceable>psql-body</replaceable></entry>
+                                <entry>Тело PSQL процедуры</entry>
+                            </row>
+                            <row>
+                                <entry><replaceable>extbody</replaceable></entry>
+                                <entry>Тело внешнего триггера. Строковый литерал который может
+                                    использоваться UDR для различных целей.</entry>
+                            </row>
+                            <row>
                                 <entry><replaceable>declarations</replaceable></entry>
                                 <entry>
                                     <para>Секция объявления локальных переменных и именованных
@@ -6593,7 +6607,9 @@ CREATE TRIGGER <replaceable>trigname</replaceable> {
                         имя процедуры внутри модуля и определённая пользователем информация. В
                         предложении <database>ENGINE</database> указывается имя движка для обработки
                         подключения внешних модулей. В Firebird для работы с внешними модулями
-                        используется движок UDR. </para>
+                        используется движок UDR. После ключевого слова AS может быть указан
+                        строковый литерал — "тело" внешнего триггера, оно может быть использовано
+                        внешнем модулем для различных целей.</para>
                 </section>
                 <section xml:id="ddl-trigger-table-create-who">
                     <title>Кто может создать DML триггер?</title>
@@ -7367,16 +7383,18 @@ ALTER TRIGGER <replaceable>trigname</replaceable> {
 [ACTIVE | INACTIVE]
 [{BEFORE | AFTER} <replaceable>&lt;mutation_list&gt;</replaceable>]
 [POSITION <replaceable>number</replaceable>]
-[                    
-  {EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable>} |                   
-  {                    
-    AS
-      [<replaceable>&lt;declarations&gt;</replaceable>]
-    BEGIN
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]
-    END
-  } 
-]
+[{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}]
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END
+  
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
 
 <replaceable>&lt;mutation_list&gt;</replaceable> ::= <replaceable>&lt;mutation&gt;</replaceable> [OR <replaceable>&lt;mutation&gt;</replaceable> [OR <replaceable>&lt;mutation&gt;</replaceable>]]
 
@@ -7589,19 +7607,25 @@ END
             <formalpara>
                 <title>Синтаксис:</title>
                 <para><programlisting>
-CREATE OR ALTER TRIGGER <replaceable>trigname</replaceable> {   
+CREATE OR ALTER TRIGGER <replaceable>trigname</replaceable> 
+{   
     <replaceable>&lt;relation_trigger_legacy&gt;</replaceable>
   | <replaceable>&lt;relation_trigger_sql2003&gt;</replaceable>
   | <replaceable>&lt;database_trigger&gt;</replaceable> 
-  | <replaceable>&lt;ddl_trigger&gt;</replaceable> }
-  {EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable>} |                   
-  {                    
-    AS
-      [<replaceable>&lt;declarations&gt;</replaceable>]
-    BEGIN
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]
-    END
-  } 
+  | <replaceable>&lt;ddl_trigger&gt;</replaceable> 
+}
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+   
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
                        </programlisting>
                     Полное описание оператора см. <link linkend="ddl-trigger-create">CREATE
                         TRIGGER</link>. </para>
@@ -7761,19 +7785,25 @@ DROP TRIGGER set_cust_no;
             <formalpara>
                 <title>Синтаксис:</title>
                 <para><programlisting>
-RECREATE TRIGGER <replaceable>trigname</replaceable> {   
+RECREATE TRIGGER <replaceable>trigname</replaceable> 
+{   
     <replaceable>&lt;relation_trigger_legacy&gt;</replaceable>
   | <replaceable>&lt;relation_trigger_sql2003&gt;</replaceable>
   | <replaceable>&lt;database_trigger&gt;</replaceable> 
-  | <replaceable>&lt;ddl_trigger&gt;</replaceable> }
-  {EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable>} |                   
-  {                    
-    AS
-      [<replaceable>&lt;declarations&gt;</replaceable>]
-    BEGIN
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]
-    END
-  } 
+  | <replaceable>&lt;ddl_trigger&gt;</replaceable> 
+}
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END   
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
                        </programlisting>
                     Полное описание оператора см. <link linkend="ddl-trigger-create">CREATE
                         TRIGGER</link>. </para>
@@ -7847,14 +7877,19 @@ END
                 <title>Синтаксис:</title>
                 <para><programlisting>
 CREATE PROCEDURE <replaceable>procname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
-RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outparam&gt;</replaceable> ...])    
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }   
+RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outparam&gt;</replaceable> ...]) 
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END
+  
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
   
 <replaceable>&lt;inparam&gt;</replaceable> ::= <replaceable>&lt;param_decl&gt;</replaceable> [{= | DEFAULT} <replaceable>&lt;value&gt;</replaceable>]  
 
@@ -7922,6 +7957,15 @@ RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outpara
                                 <entry>
                                     <para>Описание выходного параметра.</para>
                                 </entry>
+                            </row>
+                            <row>
+                                <entry><replaceable>psql-body</replaceable></entry>
+                                <entry>Тело PSQL процедуры</entry>
+                            </row>
+                            <row>
+                                <entry><replaceable>extbody</replaceable></entry>
+                                <entry>Тело внешней процедуры. Строковый литерал который может
+                                    использоваться UDR для различных целей.</entry>
                             </row>
                             <row>
                                 <entry><replaceable>declarations</replaceable></entry>
@@ -8207,7 +8251,9 @@ RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outpara
                     в которой через разделитель указано имя внешнего модуля, имя процедуры внутри
                     модуля и определённая пользователем информация. В предложении ENGINE указывается
                     имя движка для обработки подключения внешних модулей. В Firebird для работы с
-                    внешними модулями используется движок UDR. </para>
+                    внешними модулями используется движок UDR. После ключевого слова AS может быть
+                    указан строковый литерал — "тело" внешней процедуры, оно может быть использовано
+                    внешнем модулем для различных целей.</para>
             </section>
             <section xml:id="ddl-procedure-create-who">
                 <title>Кто может создать хранимую процедуру?</title>
@@ -8306,13 +8352,18 @@ CREATE PROCEDURE gen_rows (
                     <programlisting>
 ALTER PROCEDURE <replaceable>procname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outparam&gt;</replaceable> ...])    
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }   
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+  
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
   
 <replaceable>&lt;inparam&gt;</replaceable> ::= <replaceable>&lt;param_decl&gt;</replaceable> [{= | DEFAULT} <replaceable>&lt;value&gt;</replaceable>]  
 
@@ -8635,13 +8686,18 @@ END
                 <para><programlisting>
 CREATE OR ALTER PROCEDURE <replaceable>procname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outparam&gt;</replaceable> ...])    
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }   
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END    
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
                        </programlisting></para>
             </formalpara>
             <formalpara>
@@ -8807,13 +8863,18 @@ DROP PROCEDURE GET_EMP_PROJ;
                 <para><programlisting>
 RECREATE PROCEDURE <replaceable>procname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outparam&gt;</replaceable> ...])    
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }   
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END    
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>] 
                        </programlisting></para>
             </formalpara>
             <formalpara>
@@ -8908,13 +8969,18 @@ END
                 <para><programlisting>
 CREATE FUNCTION <replaceable>funcname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC]     
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }   
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+  
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
   
 <replaceable>&lt;inparam&gt;</replaceable> ::= <replaceable>&lt;param_decl&gt;</replaceable> [{= | DEFAULT} <replaceable>&lt;value&gt;</replaceable>]  
                     
@@ -8973,6 +9039,15 @@ RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation<
                                 <entry>
                                     <para>Описание входного параметра.</para>
                                 </entry>
+                            </row>
+                            <row>
+                                <entry><replaceable>psql-body</replaceable></entry>
+                                <entry>Тело PSQL процедуры</entry>
+                            </row>
+                            <row>
+                                <entry><replaceable>extbody</replaceable></entry>
+                                <entry>Тело внешней функции. Строковый литерал который может
+                                    использоваться UDR для различных целей.</entry>
                             </row>
                             <row>
                                 <entry><replaceable>declarations</replaceable></entry>
@@ -9298,7 +9373,9 @@ SELECT n, fn_t() FROM t
                     в которой через разделитель указано имя внешнего модуля, имя функции внутри
                     модуля и определённая пользователем информация. В предложении ENGINE указывается
                     имя движка для обработки подключения внешних модулей. В Firebird для работы с
-                    внешними модулями используется движок UDR. </para>
+                    внешними модулями используется движок UDR. После ключевого слова AS может быть
+                    указан строковый литерал — "тело" внешней функции, оно может быть использовано
+                    внешнем модулем для различных целей.</para>
                 <warning>
                     <para>Не следует путать внешние функции, объявленные как DECLARE EXTERNAL
                         FUNCTION, так же известные как UDF, с функциями расположенными во внешних
@@ -9471,13 +9548,18 @@ END
                 <para><programlisting>
 ALTER FUNCTION <replaceable>funcname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC]     
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }     
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END   
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]    
                        </programlisting></para>
             </formalpara>
             <formalpara>
@@ -9570,13 +9652,18 @@ END
                     <programlisting>
 CREATE OR ALTER FUNCTION <replaceable>funcname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC]     
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }     
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END    
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]   
                        </programlisting>
                 </para>
             </formalpara>
@@ -9730,13 +9817,18 @@ DROP FUNCTION ADD_INT;
                 <para><programlisting>
 RECREATE FUNCTION <replaceable>funcname</replaceable> [(<replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...])]   
 RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC]     
-  { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-  { AS       
-      [<replaceable>&lt;declarations&gt;</replaceable>]       
-    BEGIN       
-      [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-    END
-  }     
+{<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+ 
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END    
+ 
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]    
                        </programlisting></para>
             </formalpara>
             <formalpara>
@@ -10597,24 +10689,23 @@ END
 
 <replaceable>&lt;function_impl&gt;</replaceable> ::=
   FUNCTION <replaceable>func_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] 
-    RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }  
-      
+  RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}
+         
 <replaceable>&lt;procedure_impl&gt;</replaceable> ::=
   PROCEDURE <replaceable>proc_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] [RETURNS (<replaceable>&lt;out_params&gt;</replaceable>)]       
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }                              
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}                             
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]
 
 <replaceable>&lt;in_params&gt;</replaceable> ::= <replaceable>&lt;inparam&gt;</replaceable> [, <replaceable>&lt;inparam&gt;</replaceable> ...]
 
@@ -10724,6 +10815,15 @@ END
                                     <entry>
                                         <para>Описание выходного параметра.</para>
                                     </entry>
+                                </row>
+                                <row>
+                                    <entry><replaceable>psql-body</replaceable></entry>
+                                    <entry>Тело PSQL процедуры</entry>
+                                </row>
+                                <row>
+                                    <entry><replaceable>extbody</replaceable></entry>
+                                    <entry>Тело внешней процедуры/функции. Строковый литерал который может
+                                        использоваться UDR для различных целей.</entry>
                                 </row>
                                 <row>
                                     <entry><replaceable>declarations</replaceable></entry>
@@ -11040,24 +11140,23 @@ END
 
 <replaceable>&lt;function_impl&gt;</replaceable> ::=
   FUNCTION <replaceable>func_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] 
-    RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }  
+  RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}  
       
 <replaceable>&lt;procedure_impl&gt;</replaceable> ::=
   PROCEDURE <replaceable>proc_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] [RETURNS (<replaceable>&lt;out_params&gt;</replaceable>)]       
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }                              
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}                             
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]                             
                         </programlisting>
                     </para>
                 </formalpara>
@@ -11299,24 +11398,23 @@ END
 
 <replaceable>&lt;function_impl&gt;</replaceable> ::=
   FUNCTION <replaceable>func_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] 
-    RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }  
+  RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}   
       
 <replaceable>&lt;procedure_impl&gt;</replaceable> ::=
   PROCEDURE <replaceable>proc_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] [RETURNS (<replaceable>&lt;out_params&gt;</replaceable>)]       
-      { EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> }  | 
-      { AS       
-          [<replaceable>&lt;declarations&gt;</replaceable>]       
-        BEGIN       
-          [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-        END
-      }                              
+  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}                             
+
+<replaceable>&lt;psql-body&gt;</replaceable> ::=
+  AS       
+    [<replaceable>&lt;declarations&gt;</replaceable>]       
+  BEGIN       
+    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
+  END 
+
+<replaceable>&lt;external-body&gt;</replaceable> ::= 
+  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
+  [AS <replaceable>&lt;extbody&gt;</replaceable>]                             
                         </programlisting>
                     </para>
                 </formalpara>
