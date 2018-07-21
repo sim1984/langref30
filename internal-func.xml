@@ -1,6 +1,5 @@
 <!DOCTYPE chapter>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="internalfunc"
-    xml:lang="ru">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="internalfunc" xml:lang="ru">
     <info>
         <title>Встроенные функции и переменные</title>
     </info>
@@ -108,9 +107,8 @@ DATE DEFAULT CURRENT_DATE NOT NULL
                 <para>
                     <link linkend="internalfunc-contextvar-today">'TODAY'</link>, <link
                         linkend="internalfunc-contextvar-current_timestamp"
-                        >CURRENT_TIMESTAMP</link>, <link
-                        linkend="internalfunc-contextvar-current_time"
-                    >CURRENT_TIME</link>. </para>
+                    >CURRENT_TIMESTAMP</link>, <link linkend="internalfunc-contextvar-current_time"
+                        >CURRENT_TIME</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-current_role">
@@ -169,10 +167,11 @@ FROM RDB$DATABASE;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-func-context-getcontext"
-                        >RDB$GET_CONTEXT</link>. </para>
+                    <link linkend="internalfunc-func-context-getcontext">RDB$GET_CONTEXT</link>.
+                </para>
             </formalpara>
         </section>
+        
         <section xml:id="internalfunc-contextvar-current_time">
             <info>
                 <title>CURRENT_TIME</title>
@@ -253,17 +252,39 @@ SELECT CURRENT_TIME(2) FROM RDB$DATABASE;
                     </example>
                 </para>
             </formalpara>
+
+            <warning>
+                <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
+                <para>В рамках этой поддержки будет возникать несовместимость с выражением
+                        <code>CURRENT_TIME</code> предыдущих версий.</para>
+                <para>В Firebird 4.0 выражение <code>CURRENT_TIME</code> будет возвращать тип данных
+                        <code>TIME WITH TIME ZONE</code>.</para>
+                <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
+                    версий, начиная с Firebird 3.0.4 вы можете использовать выражение
+                        <code>LOCALTIME</code>. В 3.0 <code>LOCALTIME</code> является синонимом
+                        <code>CURRENT_TIME</code>.</para>
+                <para>В Firebird 4.0 <code>LOCALTIME</code> будет продолжать работать точно так же
+                    как сейчас, в то время как <code>CURRENT_TIME</code> будет возвращать другой тип
+                    данных.</para>
+
+                <para>Вам не следует начинать использовать <code>LOCALTIME</code>, если можете
+                    произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
+                    версии, поскольку старые версии Firebird не смогут распознать новые
+                    выражения.</para>
+            </warning>
+
             <formalpara>
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, <link
-                        linkend="internalfunc-contextvar-current_timestamp"
-                        >CURRENT_TIMESTAMP</link>, <link
-                        linkend="internalfunc-contextvar-current_date"
-                    >CURRENT_DATE</link>. </para>
+                    <link linkend="internalfunc-contextvar-localtime">LOCALTIME</link>,
+                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
+                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>, 
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
+                </para>
             </formalpara>
         </section>
+        
         <section xml:id="internalfunc-contextvar-current_timestamp">
             <info>
                 <title>CURRENT_TIMESTAMP</title>
@@ -344,17 +365,39 @@ SELECT CURRENT_TIMESTAMP(2) FROM RDB$DATABASE;
                     </example>
                 </para>
             </formalpara>
+
+            <warning>
+                <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
+                <para>В рамках этой поддержки будет возникать несовместимость с выражением
+                        <code>CURRENT_TIMESTAMP</code> предыдущих версий.</para>
+                <para>В Firebird 4.0 выражение <code>CURRENT_TIMESTAMP</code> будет возвращать тип
+                    данных <code>TIMESTAMP WITH TIME ZONE</code>.</para>
+                <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
+                    версий, начиная с Firebird 3.0.4 вы можете использовать выражение
+                        <code>LOCALTIMESTAMP</code>. В 3.0 <code>LOCALTIMESTAMP</code> является
+                    синонимом <code>CURRENT_TIMESTAMP</code>.</para>
+                <para>В Firebird 4.0 <code>LOCALTIMESTAMP</code> будет продолжать работать точно так
+                    же как сейчас, в то время как <code>CURRENT_TIMESTAMP</code> будет возвращать
+                    другой тип данных.</para>
+
+                <para>Вам не следует начинать использовать <code>LOCALTIMESTAMP</code>, если можете
+                    произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
+                    версии, поскольку старые версии Firebird не смогут распознать новые
+                    выражения.</para>
+            </warning>
+
             <formalpara>
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, <link
-                        linkend="internalfunc-contextvar-current_time"
-                    >CURRENT_TIME</link>, <link
-                        linkend="internalfunc-contextvar-current_date"
-                    >CURRENT_DATE</link>. </para>
+                    <link linkend="internalfunc-contextvar-localtimestamp">LOCALTIMESTAMP</link>,
+                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
+                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
+                </para>
             </formalpara>
         </section>
+        
         <section xml:id="internalfunc-contextvar-current_transaction">
             <info>
                 <title>CURRENT_TRANSACTION</title>
@@ -408,8 +451,8 @@ NEW.TRANS_ID = CURRENT_TRANSACTION;
                 <para>
                     <link linkend="internalfunc-contextvar-current_connection"
                         >CURRENT_CONNECTION</link>, <link
-                        linkend="internalfunc-func-context-getcontext"
-                        >RDB$GET_CONTEXT</link>. </para>
+                        linkend="internalfunc-func-context-getcontext">RDB$GET_CONTEXT</link>.
+                </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-current_user">
@@ -462,8 +505,7 @@ NEW.ADDED_BY = CURRENT_USER;
 
                 <para>
                     <link linkend="internalfunc-contextvar-user">USER</link>, <link
-                        linkend="internalfunc-contextvar-current_role"
-                    >CURRENT_ROLE</link>. </para>
+                        linkend="internalfunc-contextvar-current_role">CURRENT_ROLE</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-deleting">
@@ -524,9 +566,8 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-inserting">INSERTING</link>,
-                        <link linkend="internalfunc-contextvar-updating">UPDATING</link>.
-                </para>
+                    <link linkend="internalfunc-contextvar-inserting">INSERTING</link>, <link
+                        linkend="internalfunc-contextvar-updating">UPDATING</link>. </para>
             </formalpara>
         </section>
 
@@ -602,8 +643,7 @@ END
 
                 <para>
                     <link linkend="internalfunc-contextvar-sqlcode">SQLCODE</link>, <link
-                        linkend="internalfunc-contextvar-sqlstate">SQLSTATE</link>.
-                </para>
+                        linkend="internalfunc-contextvar-sqlstate">SQLSTATE</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-inserting">
@@ -662,11 +702,236 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-updating">UPDATING</link>,
-                        <link linkend="internalfunc-contextvar-deleting">DELETING</link>.
-                </para>
+                    <link linkend="internalfunc-contextvar-updating">UPDATING</link>, <link
+                        linkend="internalfunc-contextvar-deleting">DELETING</link>. </para>
             </formalpara>
         </section>
+        
+        <section xml:id="internalfunc-contextvar-localtime">
+            <info>
+                <title>LOCALTIME</title>
+                <keywordset>
+                    <keyword>LOCALTIME</keyword>
+                </keywordset>
+            </info>
+            
+            <indexterm><primary>LOCALTIME</primary></indexterm>
+            
+            <formalpara>
+                <title>Доступно в:</title>
+                
+                <para>DSQL, PSQL, ESQL.</para>
+            </formalpara>
+            <formalpara>
+                <title>Синтаксис:</title>
+                <para>
+                    <programlisting>
+LOCALTIME [(<replaceable>&lt;precision&gt;</replaceable>)]
+
+<replaceable>&lt;precision&gt;</replaceable> ::= 0 | 1 | 2 | 3                        
+                        </programlisting>
+                </para>
+            </formalpara>
+            <para>
+                <table frame="all">
+                    <?dbfo keep-together='auto'?>
+                    <title>Параметры контекстной переменной LOCALTIME</title>
+                    <tgroup cols="2">
+                        <colspec colname="c1" colnum="1" colwidth="1.2*" align="left"/>
+                        <colspec colname="c2" colnum="2" colwidth="2.8*" align="justify"/>
+                        <thead>
+                            <row>
+                                <entry align="center">Параметр</entry>
+                                <entry align="center">Описание</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry><replaceable>precision</replaceable></entry>
+                                <entry>
+                                    <para>Точность. Значение по умолчанию 0. Не поддерживается в
+                                        ESQL.</para>
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            
+            <formalpara>
+                <title>Тип возвращаемого результата:</title>
+                <para>TIME</para>
+            </formalpara>
+            
+            <para>Переменная LOCALTIME возвращает текущее время сервера. Точность определяет,
+                сколько учитывать знаков после запятой в долях секунды. Точность по умолчанию равна
+                0.</para>
+            
+            <note>
+                <para>В блоке кода PSQL (процедура, триггер, исполняемый блок) значение LOCALTIME
+                    не меняется по мере выполнения. При вызове вложенного кода, значение также не
+                    изменится и будет равно значению в коде самого верхнего уровня. Для определения
+                    реального времени используйте другие переменные, например 'NOW' (с полным
+                    приведением типа данных). </para>
+            </note>
+            
+            <formalpara>
+                <title>Примеры:</title>
+                <para>
+                    <example>
+                        <title>Использование переменной LOCALTIME</title>
+                        <para><programlisting language="sql">
+SELECT LOCALTIME(2) FROM RDB$DATABASE;
+-- результат будет (например) 23:35:33.1200            
+                </programlisting></para>
+                    </example>
+                </para>
+            </formalpara>
+            
+            <warning>
+                <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
+                <para>В рамках этой поддержки будет возникать несовместимость с выражением
+                    <code>CURRENT_TIME</code> предыдущих версий.</para>
+                <para>В Firebird 4.0 выражение <code>CURRENT_TIME</code> будет возвращать тип данных
+                    <code>TIME WITH TIME ZONE</code>.</para>
+                <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
+                    версий, начиная с Firebird 3.0.4 вы можете использовать выражение
+                    <code>LOCALTIME</code>. В 3.0 <code>LOCALTIME</code> является синонимом
+                    <code>CURRENT_TIME</code>.</para>
+                <para>В Firebird 4.0 <code>LOCALTIME</code> будет продолжать работать точно так же
+                    как сейчас, в то время как <code>CURRENT_TIME</code> будет возвращать другой тип
+                    данных.</para>
+                
+                <para>Вам не следует начинать использовать <code>LOCALTIME</code>, если можете
+                    произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
+                    версии, поскольку старые версии Firebird не смогут распознать новые
+                    выражения.</para>
+            </warning>
+            
+            <formalpara>
+                <title>См. также:</title>
+                
+                <para>
+                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
+                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
+                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>, 
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. </para>
+            </formalpara>
+        </section>    
+        
+        <section xml:id="internalfunc-contextvar-localtimestamp">
+            <info>
+                <title>LOCALTIMESTAMP</title>
+                <keywordset>
+                    <keyword>LOCALTIMESTAMP</keyword>
+                </keywordset>
+            </info>
+            
+            <indexterm><primary>LOCALTIMESTAMP</primary></indexterm>
+            
+            <formalpara>
+                <title>Доступно в:</title>
+                
+                <para>DSQL, PSQL, ESQL.</para>
+            </formalpara>
+            
+            <formalpara>
+                <title>Синтаксис:</title>
+                <para>
+                    <programlisting>
+LOCALTIMESTAMP [(<replaceable>&lt;precision&gt;</replaceable>)]
+
+<replaceable>&lt;precision&gt;</replaceable> ::= 0 | 1 | 2 | 3                        
+                        </programlisting>
+                </para>
+            </formalpara>
+            <para>
+                <table frame="all">
+                    <?dbfo keep-together='auto'?>
+                    <title>Параметры контекстной переменной LOCALTIMESTAMP</title>
+                    <tgroup cols="2">
+                        <colspec colname="c1" colnum="1" colwidth="1.2*" align="left"/>
+                        <colspec colname="c2" colnum="2" colwidth="2.8*" align="justify"/>
+                        <thead>
+                            <row>
+                                <entry align="center">Параметр</entry>
+                                <entry align="center">Описание</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry><replaceable>precision</replaceable></entry>
+                                <entry>
+                                    <para>Точность. Значение по умолчанию 3. Не поддерживается в
+                                        ESQL.</para>
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            
+            <formalpara>
+                <title>Тип возвращаемого результата:</title>
+                <para>TIMESTAMP</para>
+            </formalpara>
+            
+            <para>Переменная LOCALTIMESTAMP возвращает текущую дату и время сервера. Точность
+                определяет, сколько учитывать знаков после запятой в долях секунды. Точность по
+                умолчанию равна 3.</para>
+            <note>
+                <para>В блоке кода PSQL (процедура, триггер, исполняемый блок) значение
+                    LOCALTIMESTAMP не меняется по мере выполнения. При вызове вложенного кода,
+                    значение также не изменится и будет равно значению в коде самого верхнего
+                    уровня. Для определения реального времени используйте другие переменные,
+                    например 'NOW' (с полным приведением типа данных). </para>
+            </note>
+            
+            <formalpara>
+                <title>Примеры:</title>
+                <para>
+                    <example>
+                        <title>Использование переменной LOCALTIMESTAMP</title>
+                        <para><programlisting language="sql">
+SELECT LOCALTIMESTAMP(2) FROM RDB$DATABASE;
+-- результат будет (например) 02.03.2014 23:35:33.1200            
+                </programlisting></para>
+                    </example>
+                </para>
+            </formalpara>
+            
+            <warning>
+                <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
+                <para>В рамках этой поддержки будет возникать несовместимость с выражением
+                    <code>CURRENT_TIMESTAMP</code> предыдущих версий.</para>
+                <para>В Firebird 4.0 выражение <code>CURRENT_TIMESTAMP</code> будет возвращать тип
+                    данных <code>TIMESTAMP WITH TIME ZONE</code>.</para>
+                <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
+                    версий, начиная с Firebird 3.0.4 вы можете использовать выражение
+                    <code>LOCALTIMESTAMP</code>. В 3.0 <code>LOCALTIMESTAMP</code> является
+                    синонимом <code>CURRENT_TIMESTAMP</code>.</para>
+                <para>В Firebird 4.0 <code>LOCALTIMESTAMP</code> будет продолжать работать точно так
+                    же как сейчас, в то время как <code>CURRENT_TIMESTAMP</code> будет возвращать
+                    другой тип данных.</para>
+                
+                <para>Вам не следует начинать использовать <code>LOCALTIMESTAMP</code>, если можете
+                    произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
+                    версии, поскольку старые версии Firebird не смогут распознать новые
+                    выражения.</para>
+            </warning>
+            
+            <formalpara>
+                <title>См. также:</title>
+                
+                <para>
+                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>,
+                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
+                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
+                </para>
+            </formalpara>
+        </section>        
+        
         <section xml:id="internalfunc-contextvar-new">
             <info>
                 <title>NEW</title>
@@ -789,14 +1054,11 @@ SELECT CAST('NOW' AS TIMESTAMP) FROM rdb$database;
                 <para>
                     <link linkend="internalfunc-contextvar-current_timestamp"
                         >CURRENT_TIMESTAMP</link>, <link
-                        linkend="internalfunc-contextvar-current_date"
-                    >CURRENT_DATE</link>, <link
-                        linkend="internalfunc-contextvar-current_time"
-                    >CURRENT_TIME</link>, <link linkend="internalfunc-contextvar-today"
-                        >TODAY</link>, <link linkend="internalfunc-contextvar-tomorrow"
-                        >TOMORROW</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>.
-                </para>
+                        linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
+                        linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, <link
+                        linkend="internalfunc-contextvar-today">TODAY</link>, <link
+                        linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>, <link
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-old">
@@ -893,9 +1155,9 @@ ROW_COUNT
                             получена строка данных и 0 в противном случае;</para>
                     </listitem>
                     <listitem>
-                        <para>В цикле <link linkend="psql-operators-forselect">FOR
-                                SELECT</link> переменная ROW_COUNT увеличивается на каждой итерации
-                            (начиная с 0 в качестве первого значения);</para>
+                        <para>В цикле <link linkend="psql-operators-forselect">FOR SELECT</link>
+                            переменная ROW_COUNT увеличивается на каждой итерации (начиная с 0 в
+                            качестве первого значения);</para>
                     </listitem>
                     <listitem>
                         <para>После выборки (FETCH) из курсора, ROW_COUNT равна 1, если была
@@ -911,9 +1173,9 @@ ROW_COUNT
                     даже если было затронуто более записей </para>
             </important>
             <warning>
-                <para>Не используйте переменную ROW_COUNT внутри DML операторов. Дело в том, 
-                    что эта переменная сбрасывает своё значение в 0 перед началом выполнения 
-                    любого DML оператора, а потому вы можете получить не то что ожидаете.
+                <para>Не используйте переменную ROW_COUNT внутри DML операторов. Дело в том, что эта
+                    переменная сбрасывает своё значение в 0 перед началом выполнения любого DML
+                    оператора, а потому вы можете получить не то что ожидаете.
                     <programlisting language="sql">
 ...                        
 UPDATE t2 SET 
@@ -924,11 +1186,12 @@ WHERE new_id = old.id;
 
 INSERT INTO t2log(evt, affected_rows) VALUES('upd', ROW_COUNT); 
 ...
-                    </programlisting>                       
-                    В вышеприведённом примере в столбец affected_rows будут записаны нулевые значения,
-                    даже если оператором UPDATE были затронуты строки. Для того, чтобы исправить эту 
-                    ошибку, необходимо сохранить значение контекстной переменной ROW_COUNT в локальную 
-                    переменную PSQL модуля и использовать эту локальную переменную в DML операторе.
+                    </programlisting>
+                    В вышеприведённом примере в столбец affected_rows будут записаны нулевые
+                    значения, даже если оператором UPDATE были затронуты строки. Для того, чтобы
+                    исправить эту ошибку, необходимо сохранить значение контекстной переменной
+                    ROW_COUNT в локальную переменную PSQL модуля и использовать эту локальную
+                    переменную в DML операторе.
                     <programlisting language="sql">
 ...                        
 DECLARE rc INT;                        
@@ -942,7 +1205,7 @@ WHERE new_id = old.id;
 rc = ROW_COUNT;
 INSERT INTO t2log(evt, affected_rows) VALUES('upd', rc); 
 ...
-                    </programlisting>                      
+                    </programlisting>
                 </para>
             </warning>
             <formalpara>
@@ -1020,8 +1283,7 @@ END
 
                 <para>
                     <link linkend="internalfunc-contextvar-gdscode">GDSCODE</link>, <link
-                        linkend="internalfunc-contextvar-sqlstate">SQLSTATE</link>.
-                </para>
+                        linkend="internalfunc-contextvar-sqlstate">SQLSTATE</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-sqlstate">
@@ -1156,11 +1418,9 @@ SELECT TIMESTAMP 'TODAY' FROM rdb$database;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-current_date"
-                        >CURRENT_DATE</link>, <link
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>.
-                </para>
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-tomorrow">
@@ -1215,11 +1475,9 @@ SELECT DATE 'Tomorrow' FROM rdb$database;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-current_date"
-                        >CURRENT_DATE</link>, <link
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-today">TODAY</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>.
-                </para>
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-updating">
@@ -1275,9 +1533,8 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-inserting">INSERTING</link>,
-                        <link linkend="internalfunc-contextvar-deleting">DELETING</link>.
-                </para>
+                    <link linkend="internalfunc-contextvar-inserting">INSERTING</link>, <link
+                        linkend="internalfunc-contextvar-deleting">DELETING</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-yesterday">
@@ -1331,11 +1588,9 @@ SELECT TIMESTAMP 'YESTERDAY' FROM rdb$database;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-current_date"
-                        >CURRENT_DATE</link>, <link
+                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-today">TODAY</link>, <link
-                        linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>.
-                </para>
+                        linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-user">
@@ -1384,10 +1639,8 @@ NEW.ADDED_BY = USER;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-current_user"
-                        >CURRENT_USER</link>, <link
-                        linkend="internalfunc-contextvar-current_role"
-                    >CURRENT_ROLE</link>. </para>
+                    <link linkend="internalfunc-contextvar-current_user">CURRENT_USER</link>, <link
+                        linkend="internalfunc-contextvar-current_role">CURRENT_ROLE</link>. </para>
             </formalpara>
         </section>
     </section>
@@ -1664,8 +1917,8 @@ NEW.USER_ADR = RDB$GET_CONTEXT ('SYSTEM', 'CLIENT_ADDRESS');
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-context-setcontext"
-                            >RDB$SET_CONTEXT</link>. </para>
+                        <link linkend="internalfunc-func-context-setcontext">RDB$SET_CONTEXT</link>.
+                    </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-context-setcontext">
@@ -1829,8 +2082,8 @@ COMMIT;
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-context-getcontext"
-                            >RDB$GET_CONTEXT</link>. </para>
+                        <link linkend="internalfunc-func-context-getcontext">RDB$GET_CONTEXT</link>.
+                    </para>
                 </formalpara>
             </section>
         </section>
@@ -2739,9 +2992,8 @@ FLOOR (<replaceable>number</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-math-ceil">CEIL, CEILING</link>,
-                            <link linkend="internalfunc-func-math-trunc">TRUNC</link>.
-                    </para>
+                        <link linkend="internalfunc-func-math-ceil">CEIL, CEILING</link>, <link
+                            linkend="internalfunc-func-math-trunc">TRUNC</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-math-ln">
@@ -3714,9 +3966,8 @@ TRUNC(-163.41)      -- Результат: -163
 
                     <para>
                         <link linkend="internalfunc-func-math-round">ROUND</link>, <link
-                            linkend="internalfunc-func-math-ceil">CEIL, CEILING</link>,
-                            <link linkend="internalfunc-func-math-floor">FLOOR</link>.
-                    </para>
+                            linkend="internalfunc-func-math-ceil">CEIL, CEILING</link>, <link
+                            linkend="internalfunc-func-math-floor">FLOOR</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -3784,8 +4035,7 @@ ASCII_CHAR (<replaceable>code</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-ascii_val"
-                            >ASCII_VAL</link>. </para>
+                        <link linkend="internalfunc-func-string-ascii_val">ASCII_VAL</link>. </para>
                 </formalpara>
             </section>
 
@@ -3861,8 +4111,8 @@ ASCII_VAL (<replaceable>ch</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-ascii_char"
-                            >ASCII_CHAR</link>. </para>
+                        <link linkend="internalfunc-func-string-ascii_char">ASCII_CHAR</link>.
+                    </para>
                 </formalpara>
             </section>
 
@@ -3959,9 +4209,8 @@ FROM RDB$DATABASE
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-char_length"
-                            >CHAR_LENGTH</link>, <link
-                            linkend="internalfunc-func-string-octet_length"
+                        <link linkend="internalfunc-func-string-char_length">CHAR_LENGTH</link>,
+                            <link linkend="internalfunc-func-string-octet_length"
                             >OCTET_LENGTH</link>. </para>
                 </formalpara>
             </section>
@@ -4035,10 +4284,9 @@ CHARACTER_LENGTH (<replaceable>str</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-bit_length"
-                            >BIT_LENGTH</link>, <link
-                            linkend="internalfunc-func-string-octet_length"
-                            >OCTET_LENGTH</link>. </para>
+                        <link linkend="internalfunc-func-string-bit_length">BIT_LENGTH</link>, <link
+                            linkend="internalfunc-func-string-octet_length">OCTET_LENGTH</link>.
+                    </para>
                 </formalpara>
             </section>
 
@@ -4198,8 +4446,7 @@ SELECT LEFT('ABC', 2) FROM rdb$database;
 
                     <para>
                         <link linkend="internalfunc-func-string-right">RIGHT</link>, <link
-                            linkend="internalfunc-func-string-substring">SUBSTRING</link>.
-                    </para>
+                            linkend="internalfunc-func-string-substring">SUBSTRING</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-lower">
@@ -4273,8 +4520,7 @@ FROM RDB$DATABASE
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-upper">UPPER</link>.
-                    </para>
+                        <link linkend="internalfunc-func-string-upper">UPPER</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-lpad">
@@ -4490,10 +4736,9 @@ FROM rdb$database
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-bit_length"
-                            >BIT_LENGTH</link>, <link
-                            linkend="internalfunc-func-string-char_length"
-                            >CHAR_LENGTH</link>. </para>
+                        <link linkend="internalfunc-func-string-bit_length">BIT_LENGTH</link>, <link
+                            linkend="internalfunc-func-string-char_length">CHAR_LENGTH</link>.
+                    </para>
                 </formalpara>
             </section>
 
@@ -4652,10 +4897,8 @@ OVERLAY ('' PLACING 'Hello' FROM 4 FOR 20) -- Результат: 'Hello'
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-substring"
-                            >SUBSTRING</link>, <link
-                            linkend="internalfunc-func-string-replace">REPLACE</link>.
-                    </para>
+                        <link linkend="internalfunc-func-string-substring">SUBSTRING</link>, <link
+                            linkend="internalfunc-func-string-replace">REPLACE</link>. </para>
                 </formalpara>
             </section>
 
@@ -4782,8 +5025,7 @@ POSITION ('be' in 'Alas, poor Yorick!') -- Результат: 0
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-substring"
-                            >SUBSTRING</link>. </para>
+                        <link linkend="internalfunc-func-string-substring">SUBSTRING</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-replace">
@@ -4909,8 +5151,7 @@ REPLACE ('Billy Wilder', '', 'abc')    -- возвращает 'Billy Wilder'
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-overlay">OVERLAY</link>.
-                    </para>
+                        <link linkend="internalfunc-func-string-overlay">OVERLAY</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-reverse">
@@ -5089,8 +5330,7 @@ SELECT RIGHT('ABC', 1) FROM rdb$database;
 
                     <para>
                         <link linkend="internalfunc-func-string-left">LEFT</link>, <link
-                            linkend="internalfunc-func-string-substring">SUBSTRING</link>.
-                    </para>
+                            linkend="internalfunc-func-string-substring">SUBSTRING</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-rpad">
@@ -5368,13 +5608,12 @@ SUBSTRING('abcabc' SIMILAR '#"abc#"' ESCAPE '#')     -- &lt;null&gt;
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-position">POSITION</link>,
-                            <link linkend="internalfunc-func-string-left">LEFT</link>,
-                            <link linkend="internalfunc-func-string-right">RIGHT</link>,
-                            <link linkend="internalfunc-func-string-char_length"
-                            >CHAR_LENGTH</link>, <link
-                            linkend="common-predicats-othercompare-similar">SIMILAR
-                            TO</link>. </para>
+                        <link linkend="internalfunc-func-string-position">POSITION</link>, <link
+                            linkend="internalfunc-func-string-left">LEFT</link>, <link
+                            linkend="internalfunc-func-string-right">RIGHT</link>, <link
+                            linkend="internalfunc-func-string-char_length">CHAR_LENGTH</link>, <link
+                            linkend="common-predicats-othercompare-similar">SIMILAR TO</link>.
+                    </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-trim">
@@ -5530,9 +5769,8 @@ FROM RDB$DATABASE -- Результат: ' I love you El'
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-overlay">OVERLAY</link>,
-                            <link linkend="internalfunc-func-string-replace"
-                            >REPLACE</link>. </para>
+                        <link linkend="internalfunc-func-string-overlay">OVERLAY</link>, <link
+                            linkend="internalfunc-func-string-replace">REPLACE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-string-upper">
@@ -5612,8 +5850,7 @@ FROM RDB$DATABASE
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-string-lower">LOWER</link>.
-                    </para>
+                        <link linkend="internalfunc-func-string-lower">LOWER</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -5747,9 +5984,9 @@ T                             MS
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-datetime-datediff"
-                            >DATEDIFF</link>, <link linkend="types-datetime-operation"
-                            >Операции, использующие значения даты и времени</link>. </para>
+                        <link linkend="internalfunc-func-datetime-datediff">DATEDIFF</link>, <link
+                            linkend="types-datetime-operation">Операции, использующие значения даты
+                            и времени</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-datetime-datediff">
@@ -5892,9 +6129,9 @@ DATEDIFF (DAY FROM CURRENT_DATE TO CAST (? AS DATE))
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-datetime-dateadd">DATEADD</link>,
-                            <link linkend="types-datetime-operation">Операции,
-                            использующие значения даты и времени</link>. </para>
+                        <link linkend="internalfunc-func-datetime-dateadd">DATEADD</link>, <link
+                            linkend="types-datetime-operation">Операции, использующие значения даты
+                            и времени</link>. </para>
                 </formalpara>
             </section>
 
@@ -6516,8 +6753,7 @@ BIN_AND (<replaceable>number</replaceable> [, <replaceable>number</replaceable> 
 
                     <para>
                         <link linkend="internalfunc-func-bit-bin_or">BIN_OR</link>, <link
-                            linkend="internalfunc-func-bit-bin_xor">BIN_XOR</link>.
-                    </para>
+                            linkend="internalfunc-func-bit-bin_xor">BIN_XOR</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-bit-bin_not">
@@ -6578,8 +6814,7 @@ BIN_NOT (<replaceable>number</replaceable>)
 
                     <para>
                         <link linkend="internalfunc-func-bit-bin_or">BIN_OR</link>, <link
-                            linkend="internalfunc-func-bit-bin_and">BIN_AND</link>.
-                    </para>
+                            linkend="internalfunc-func-bit-bin_and">BIN_AND</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-bit-bin_or">
@@ -6639,9 +6874,8 @@ BIN_OR (<replaceable>number</replaceable> [, <replaceable>number</replaceable> .
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-bit-bin_and">BIN_AND</link>,
-                            <link linkend="internalfunc-func-bit-bin_xor">BIN_XOR</link>.
-                    </para>
+                        <link linkend="internalfunc-func-bit-bin_and">BIN_AND</link>, <link
+                            linkend="internalfunc-func-bit-bin_xor">BIN_XOR</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-bit-bin_shl">
@@ -6709,8 +6943,7 @@ BIN_SHL (<replaceable>number</replaceable>, <replaceable>shift</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-bit-bin_shr">BIN_SHR</link>.
-                    </para>
+                        <link linkend="internalfunc-func-bit-bin_shr">BIN_SHR</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-bit-bin_shr">
@@ -6782,8 +7015,7 @@ BIN_SHR (<replaceable>number</replaceable>, <replaceable>shift</replaceable>)
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-bit-bin_shl">BIN_SHL</link>.
-                    </para>
+                        <link linkend="internalfunc-func-bit-bin_shl">BIN_SHL</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-bit-bin_xor">
@@ -6843,9 +7075,8 @@ BIN_XOR (<replaceable>number</replaceable> [, <replaceable>number</replaceable> 
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-bit-bin_and">BIN_AND</link>,
-                            <link linkend="internalfunc-func-bit-bin_or">BIN_OR</link>.
-                    </para>
+                        <link linkend="internalfunc-func-bit-bin_and">BIN_AND</link>, <link
+                            linkend="internalfunc-func-bit-bin_or">BIN_OR</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -6932,9 +7163,9 @@ SELECT CHAR_TO_UUID('A0bF4E45-3029-2A44-X493-4998c9b439A3') FROM rdb$database
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-uuid-gen_uuid">GEN_UUID</link>,
-                            <link linkend="internalfunc-func-uuid-uuid_to_char"
-                            >UUID_TO_CHAR</link>. </para>
+                        <link linkend="internalfunc-func-uuid-gen_uuid">GEN_UUID</link>, <link
+                            linkend="internalfunc-func-uuid-uuid_to_char">UUID_TO_CHAR</link>.
+                    </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-uuid-gen_uuid">
@@ -6993,10 +7224,9 @@ SELECT GEN_UUID() AS GUID FROM RDB$DATABASE
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-uuid-char_to_uuid"
-                            >CHAR_TO_UUID</link>, <link
-                            linkend="internalfunc-func-uuid-uuid_to_char"
-                            >UUID_TO_CHAR</link>. </para>
+                        <link linkend="internalfunc-func-uuid-char_to_uuid">CHAR_TO_UUID</link>,
+                            <link linkend="internalfunc-func-uuid-uuid_to_char">UUID_TO_CHAR</link>.
+                    </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-uuid-uuid_to_char">
@@ -7080,9 +7310,9 @@ SELECT UUID_TO_CHAR('Firebird swings!') FROM RDB$DATABASE;
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-uuid-gen_uuid">GEN_UUID</link>,
-                            <link linkend="internalfunc-func-uuid-char_to_uuid"
-                            >CHAR_TO_UUID</link>. </para>
+                        <link linkend="internalfunc-func-uuid-gen_uuid">GEN_UUID</link>, <link
+                            linkend="internalfunc-func-uuid-char_to_uuid">CHAR_TO_UUID</link>.
+                    </para>
                 </formalpara>
             </section>
         </section>
@@ -7383,12 +7613,11 @@ END
                 </formalpara>
 
                 <para>Данная функция эквивалентна конструкции <link
-                        linkend="common-expr-cond-case-simple">Простой CASE</link>, в
-                    которой заданное выражение сравнивается с другими выражениями до нахождения
-                    совпадения. Результатом является значение, указанное после выражения, с которым
-                    найдено совпадение. Если совпадений не найдено, то возвращается значение по
-                    умолчанию (если оно, конечно, задано – в противном случае возвращается
-                    NULL).</para>
+                        linkend="common-expr-cond-case-simple">Простой CASE</link>, в которой
+                    заданное выражение сравнивается с другими выражениями до нахождения совпадения.
+                    Результатом является значение, указанное после выражения, с которым найдено
+                    совпадение. Если совпадений не найдено, то возвращается значение по умолчанию
+                    (если оно, конечно, задано – в противном случае возвращается NULL).</para>
                 <caution>
                     <para>Совпадение эквивалентно оператору &quot;=&quot;, т.е. если
                             <replaceable>testexpr</replaceable> имеет значение NULL, то он не
@@ -7596,8 +7825,7 @@ FROM PRICELIST
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-case-minvalue">MINVALUE</link>.
-                    </para>
+                        <link linkend="internalfunc-func-case-minvalue">MINVALUE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-case-minvalue">
@@ -7678,8 +7906,7 @@ FROM PRICELIST
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-case-maxvalue">MAXVALUE</link>.
-                    </para>
+                        <link linkend="internalfunc-func-case-maxvalue">MAXVALUE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-func-case-nullif">
@@ -7760,8 +7987,8 @@ SELECT AVG(NULLIF(weight, -1)) FROM cargo;
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-case-coalesce">COALESCE</link>,
-                            <link linkend="common-expr-cond-case">CASE</link>. </para>
+                        <link linkend="internalfunc-func-case-coalesce">COALESCE</link>, <link
+                            linkend="common-expr-cond-case">CASE</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -8166,8 +8393,8 @@ GROUP BY dept_no
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="dml-select">SELECT</link>, <link
-                        linkend="internalfunc-agg-min">MIN</link>. </para>
+                    <link linkend="dml-select">SELECT</link>, <link linkend="internalfunc-agg-min"
+                        >MIN</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-agg-min">
@@ -8258,8 +8485,8 @@ GROUP BY dept_no
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="dml-select">SELECT</link>, <link
-                        linkend="internalfunc-agg-max">MAX</link>. </para>
+                    <link linkend="dml-select">SELECT</link>, <link linkend="internalfunc-agg-max"
+                        >MAX</link>. </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-agg-sum">
@@ -8458,9 +8685,8 @@ FROM measure
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>,
-                            <link linkend="internalfunc-agg-stat-stddev_pop"
-                            >STDDEV_POP</link>. </para>
+                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>, <link
+                            linkend="internalfunc-agg-stat-stddev_pop">STDDEV_POP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-stat-covar_pop">
@@ -8561,10 +8787,9 @@ FROM measure
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-covar_samp"
-                        >COVAR_SAMP</link>, <link linkend="internalfunc-agg-sum"
-                            >SUM</link>, <link linkend="internalfunc-agg-count"
-                            >COUNT</link>. </para>
+                        <link linkend="internalfunc-agg-stat-covar_samp">COVAR_SAMP</link>, <link
+                            linkend="internalfunc-agg-sum">SUM</link>, <link
+                            linkend="internalfunc-agg-count">COUNT</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-stat-covar_samp">
@@ -8665,8 +8890,8 @@ FROM measure
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>,
-                            <link linkend="internalfunc-agg-sum">SUM</link>, <link
+                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>, <link
+                            linkend="internalfunc-agg-sum">SUM</link>, <link
                             linkend="internalfunc-agg-count">COUNT</link>. </para>
                 </formalpara>
             </section>
@@ -8758,10 +8983,8 @@ GROUP BY dept_no
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-stddev_pop"
-                            >STDDEV_SAMP</link>, <link
-                            linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-stat-stddev_pop">STDDEV_SAMP</link>, <link
+                            linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-stat-stddev_samp">
@@ -8852,9 +9075,8 @@ GROUP BY dept_no
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-stddev_pop"
-                        >STDDEV_POP</link>, <link linkend="internalfunc-agg-stat-var_samp"
-                            >VAR_SAMP</link>. </para>
+                        <link linkend="internalfunc-agg-stat-stddev_pop">STDDEV_POP</link>, <link
+                            linkend="internalfunc-agg-stat-var_samp">VAR_SAMP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-stat-var_pop">
@@ -8948,8 +9170,8 @@ GROUP BY dept_no
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-var_samp">VAR_SAMP</link>,
-                            <link linkend="internalfunc-agg-sum">SUM</link>, <link
+                        <link linkend="internalfunc-agg-stat-var_samp">VAR_SAMP</link>, <link
+                            linkend="internalfunc-agg-sum">SUM</link>, <link
                             linkend="internalfunc-agg-count">COUNT</link>. </para>
                 </formalpara>
             </section>
@@ -9044,8 +9266,8 @@ GROUP BY dept_no
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>,
-                            <link linkend="internalfunc-agg-sum">SUM</link>, <link
+                        <link linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>, <link
+                            linkend="internalfunc-agg-sum">SUM</link>, <link
                             linkend="internalfunc-agg-count">COUNT</link>. </para>
                 </formalpara>
             </section>
@@ -9064,7 +9286,7 @@ GROUP BY dept_no
                 переменной, зависящей от <replaceable>х</replaceable>.</para>
             <para>Любую функции линейной регрессии из статистических функций можно использовать в
                 качестве оконной. Подробнее см. <link linkend="internalfunc-window-agg"
-                    >OVER</link>.</para>
+                >OVER</link>.</para>
             <section xml:id="internalfunc-agg-regr-regr_avgx">
                 <info>
                     <title>REGR_AVGX</title>
@@ -9147,10 +9369,8 @@ SUM(<replaceable>&lt;X></replaceable>) / REGR_COUNT(<replaceable>y</replaceable>
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_count"
-                        >REGR_COUNT</link>, <link
-                            linkend="internalfunc-agg-regr-regr_avgy">REGR_AVGY</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-regr-regr_count">REGR_COUNT</link>, <link
+                            linkend="internalfunc-agg-regr-regr_avgy">REGR_AVGY</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-regr-regr_avgy">
@@ -9235,10 +9455,8 @@ SUM(<replaceable>&lt;Y></replaceable>) / REGR_COUNT(<replaceable>y</replaceable>
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_count"
-                        >REGR_COUNT</link>, <link
-                            linkend="internalfunc-agg-regr-regr_avgx">REGR_AVGX</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-regr-regr_count">REGR_COUNT</link>, <link
+                            linkend="internalfunc-agg-regr-regr_avgx">REGR_AVGX</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-regr-regr_count">
@@ -9444,11 +9662,9 @@ BYYEAR     TOTAL_VALUE
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_avgy">REGR_AVGY</link>,
-                            <link linkend="internalfunc-agg-regr-regr_avgx"
-                            >REGR_AVGX</link>, <link
-                            linkend="internalfunc-agg-regr-regr_slope">REGR_SLOPE</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-regr-regr_avgy">REGR_AVGY</link>, <link
+                            linkend="internalfunc-agg-regr-regr_avgx">REGR_AVGX</link>, <link
+                            linkend="internalfunc-agg-regr-regr_slope">REGR_SLOPE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-stat-regr-regr_r2">
@@ -9617,8 +9833,7 @@ COVAR_POP(<replaceable>y</replaceable>, <replaceable>x</replaceable>) / VAR_POP(
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-regr-regr_sxx">
@@ -9701,9 +9916,8 @@ REGR_COUNT(<replaceable>y</replaceable>, <replaceable>x</replaceable>) * VAR_POP
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_count"
-                        >REGR_COUNT</link>, <link linkend="internalfunc-agg-stat-var_pop"
-                            >VAR_POP</link>. </para>
+                        <link linkend="internalfunc-agg-regr-regr_count">REGR_COUNT</link>, <link
+                            linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-regr-regr_sxy">
@@ -9784,10 +9998,8 @@ REGR_COUNT(<replaceable>y</replaceable>, <replaceable>x</replaceable>) * COVAR_P
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_count"
-                        >REGR_COUNT</link>, <link
-                            linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>.
-                    </para>
+                        <link linkend="internalfunc-agg-regr-regr_count">REGR_COUNT</link>, <link
+                            linkend="internalfunc-agg-stat-covar_pop">COVAR_POP</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-agg-regr-regr_syy">
@@ -9870,9 +10082,8 @@ REGR_COUNT(<replaceable>y</replaceable>, <replaceable>x</replaceable>) * VAR_POP
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-agg-regr-regr_count"
-                        >REGR_COUNT</link>, <link linkend="internalfunc-agg-stat-var_pop"
-                            >VAR_POP</link>. </para>
+                        <link linkend="internalfunc-agg-regr-regr_count">REGR_COUNT</link>, <link
+                            linkend="internalfunc-agg-stat-var_pop">VAR_POP</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -10301,11 +10512,10 @@ id salary dense_rank
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-rank-rank">RANK</link>,
-                            <link linkend="internalfunc-window-rank-row_number"
-                            >ROW_NUMBER</link>. </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-rank-rank">RANK</link>, <link
+                            linkend="internalfunc-window-rank-row_number">ROW_NUMBER</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-rank-rank">
@@ -10369,12 +10579,10 @@ id salary rank
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-rank-dense_rank"
-                            >DENSE_RANK</link>, <link
-                            linkend="internalfunc-window-rank-row_number"
-                            >ROW_NUMBER</link>. </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-rank-dense_rank">DENSE_RANK</link>, <link
+                            linkend="internalfunc-window-rank-row_number">ROW_NUMBER</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-rank-row_number">
@@ -10434,11 +10642,10 @@ id salary row_number
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-rank-rank">RANK</link>,
-                            <link linkend="internalfunc-window-rank-dense_rank"
-                            >DENSE_RANK</link>. </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-rank-rank">RANK</link>, <link
+                            linkend="internalfunc-window-rank-dense_rank">DENSE_RANK</link>. </para>
                 </formalpara>
             </section>
         </section>
@@ -10560,12 +10767,10 @@ FIRST_VALUE(<replaceable>&lt;expr&gt;</replaceable>) OVER ([<replaceable>&lt;par
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-nav-last_value"
-                            >LAST_VALUE</link>, <link
-                            linkend="internalfunc-window-nav-nth_value">NTH_VALUE</link>.
-                    </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-nav-last_value">LAST_VALUE</link>, <link
+                            linkend="internalfunc-window-nav-nth_value">NTH_VALUE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-nav-lag">
@@ -10692,10 +10897,9 @@ bydate        cost    change   percent_change
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-nav-lead">LEAD</link>.
-                    </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-nav-lead">LEAD</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-nav-last_value">
@@ -10759,12 +10963,10 @@ LAST_VALUE(<replaceable>&lt;expr&gt;</replaceable>) OVER([<replaceable>&lt;parti
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-nav-first_value"
-                            >FIRST_VALUE</link>, <link
-                            linkend="internalfunc-window-nav-nth_value">NTH_VALUE</link>.
-                    </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-nav-first_value">FIRST_VALUE</link>, <link
+                            linkend="internalfunc-window-nav-nth_value">NTH_VALUE</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-nav-lead">
@@ -10857,10 +11059,9 @@ LEAD(<replaceable>&lt;expr&gt;</replaceable> [, <replaceable>&lt;offset&gt;</rep
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-nav-lag">LAG</link>.
-                    </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-nav-lag">LAG</link>. </para>
                 </formalpara>
             </section>
             <section xml:id="internalfunc-window-nav-nth_value">
@@ -10934,12 +11135,10 @@ NTH_VALUE(<replaceable>&lt;expr&gt;</replaceable> [, <replaceable>&lt;offset&gt;
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="internalfunc-window-partition">PARTITION BY</link>,
-                            <link linkend="internalfunc-window-order">ORDER BY</link>,
-                            <link linkend="internalfunc-window-nav-first_value"
-                            >FIRST_VALUE</link>, <link
-                            linkend="internalfunc-window-nav-last_value"
-                        >LAST_VALUE</link>. </para>
+                            linkend="internalfunc-window-partition">PARTITION BY</link>, <link
+                            linkend="internalfunc-window-order">ORDER BY</link>, <link
+                            linkend="internalfunc-window-nav-first_value">FIRST_VALUE</link>, <link
+                            linkend="internalfunc-window-nav-last_value">LAST_VALUE</link>. </para>
                 </formalpara>
             </section>
         </section>

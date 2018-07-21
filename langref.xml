@@ -4,7 +4,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="langref" xml:lang="ru">
     <info>
         <title>Руководство по языку SQL СУБД Firebird 3.0</title>
-        <edition>10 июня 2018 — v.0048-1 для Firebird 3.0.3</edition>
+        <edition>21 июля 2018 — v.0049-1 для Firebird 3.0.4</edition>
 
         <authorgroup>
             <author>

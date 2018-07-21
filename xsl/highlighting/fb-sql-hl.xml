@@ -233,6 +233,8 @@ Copyright (C) 2012 Michiel Hendriks, Martin Hujer, k42b3
       <keyword>LINGER</keyword>
       <keyword>LIST</keyword>
       <keyword>LN</keyword>
+      <keyword>LOCALTIME</keyword>
+      <keyword>LOCALTIMESTAMP</keyword>
       <keyword>LOCK</keyword>
       <keyword>LOG</keyword>
       <keyword>LOG10</keyword>

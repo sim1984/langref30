@@ -114,6 +114,8 @@
                 <member>LEADING</member>
                 <member>LEFT</member>
                 <member>LIKE</member>
+                <member>LOCALTIME</member>
+                <member>LOCALTIMESTAMP</member>
                 <member>LONG</member>
                 <member>LOWER</member>
                 <member>MAX</member>
@@ -441,6 +443,8 @@
                 <member>LINGER</member>
                 <member>LIST</member>
                 <member>LN</member>
+                <member>LOCALTIME</member>
+                <member>LOCALTIMESTAMP</member>                
                 <member>LOCK</member>
                 <member>LOG</member>
                 <member>LOG10</member>

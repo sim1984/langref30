@@ -75,10 +75,10 @@
         <para>
             <itemizedlist spacing="compact">
                 <listitem>
-                    <para><personname><surname>Денис</surname><firstname>Симонов</firstname></personname>;</para>
+                    <para><personname><firstname>Денис</firstname><surname>Симонов</surname></personname>;</para>
                 </listitem>
                 <listitem>
-                    <para><personname><surname>Пол</surname><firstname>Винкенуг</firstname></personname>;</para>
+                    <para><personname><firstname>Пол</firstname><surname>Винкенуг</surname></personname>;</para>
                 </listitem>
                 <listitem>
                     <para><personname><firstname>Дмитрий</firstname><surname>Филиппов</surname></personname>;</para>
@@ -100,7 +100,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <para>Редакторы –
+        <para>Редакторы —
                 <personname><firstname>Александр</firstname><surname>Карпейкин</surname></personname>,
                     <personname><firstname>Дмитрий</firstname><surname>Кузьменко</surname></personname>,
                     <personname><firstname>Алексей</firstname><surname>Ковязин</surname></personname>,
@@ -120,10 +120,11 @@
             площадок по объёму торгов ценными бумагами, суммарной капитализации торгуемых акций и в
             десятку крупнейших бирж производных финансовых инструментов. </para>
         <para>Золотым спонсором <quote>Руководства по языку СУБД Firebird</quote> является IBSurgeon
-            (iBase.ru) (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ib-aid.com"
-                >www.ib-aid.com</link>, <link xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="http://www.ibase.ru">www.ibase.ru</link>): техническая поддержка и инструменты
-            разработчика и администратора для СУБД Firebird. </para>
+            (iBase.ru) (<link xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="http://www.ib-aid.com">www.ib-aid.com</link>, <link
+                xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibase.ru"
+                >www.ibase.ru</link>): техническая поддержка и инструменты разработчика и
+            администратора для СУБД Firebird. </para>
     </simplesect>
 
     <simplesect xml:id="intro-thanks">
@@ -137,11 +138,39 @@
         <title>Обновления</title>
 
         <para>Так как СУБД Firebird постоянно развивается, то изменяется и улучшается его
-            документация. Вы можете получить обновлённые версии этого документа и других частей
-            документации по Firebird на русском языке на сайте проекта документации: <link
+            документация. Вы можете получить самые свежие версии этого документа по адресам:
+                <itemizedlist spacing="compact">
+                <listitem>
+                    <para>PDF — <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xlink:href="https://github.com/sim1984/langref30/releases/download/langref30/langref30.pdf"
+                            >https://github.com/sim1984/langref30/releases/download/langref30/langref30.pdf</link></para>
+                </listitem>
+                <listitem>
+                    <para>одностраничный HTML — <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xlink:href="https://github.com/sim1984/langref30/releases/download/langref30/langref30-html.zip"
+                            >https://github.com/sim1984/langref30/releases/download/langref30/langref30-html.zip</link></para>
+                </listitem>
+                <listitem>
+                    <para>многостраничный HTML — <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xlink:href="https://github.com/sim1984/langref30/releases/download/langref30/langref30-html-chunks.zip"
+                            >https://github.com/sim1984/langref30/releases/download/langref30/langref30-html-chunks.zip</link></para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>Исходный код проекта находится по адресу <link
                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="https://www.assembla.com/spaces/firebird-russian-documentation/wiki"
-                >https://www.assembla.com/spaces/firebird-russian-documentation/wiki</link>
+                xlink:href="https://github.com/sim1984/langref30"
+                >https://github.com/sim1984/langref30</link>.</para>
+
+        <para>На официальном сайте firebirdsql.org документ доступен по адресу <link
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="https://www.firebirdsql.org/file/documentation/reference_manuals/firebird-language-reference-30-rus.pdf"
+                >https://www.firebirdsql.org/file/documentation/reference_manuals/firebird-language-reference-30-rus.pdf</link>
+        </para>
+
+        <para>Кроме того, данный документ выложен в различных форматах на сайте ibase.ru <link
+                xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibase.ru/develop/"
+                >http://www.ibase.ru/develop/</link>
         </para>
     </simplesect>
 </preface>
