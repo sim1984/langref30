@@ -171,7 +171,7 @@ FROM RDB$DATABASE;
                 </para>
             </formalpara>
         </section>
-        
+
         <section xml:id="internalfunc-contextvar-current_time">
             <info>
                 <title>CURRENT_TIME</title>
@@ -277,14 +277,14 @@ SELECT CURRENT_TIME(2) FROM RDB$DATABASE;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="internalfunc-contextvar-localtime">LOCALTIME</link>,
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
-                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>, 
-                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
-                </para>
+                    <link linkend="internalfunc-contextvar-localtime">LOCALTIME</link>, <link
+                        linkend="internalfunc-contextvar-now">'NOW'</link>, <link
+                        linkend="internalfunc-contextvar-current_timestamp"
+                    >CURRENT_TIMESTAMP</link>, <link linkend="internalfunc-contextvar-current_date"
+                        >CURRENT_DATE</link>. </para>
             </formalpara>
         </section>
-        
+
         <section xml:id="internalfunc-contextvar-current_timestamp">
             <info>
                 <title>CURRENT_TIMESTAMP</title>
@@ -391,13 +391,12 @@ SELECT CURRENT_TIMESTAMP(2) FROM RDB$DATABASE;
 
                 <para>
                     <link linkend="internalfunc-contextvar-localtimestamp">LOCALTIMESTAMP</link>,
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
-                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
-                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
-                </para>
+                        <link linkend="internalfunc-contextvar-now">'NOW'</link>, <link
+                        linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, <link
+                        linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. </para>
             </formalpara>
         </section>
-        
+
         <section xml:id="internalfunc-contextvar-current_transaction">
             <info>
                 <title>CURRENT_TRANSACTION</title>
@@ -706,7 +705,7 @@ END
                         linkend="internalfunc-contextvar-deleting">DELETING</link>. </para>
             </formalpara>
         </section>
-        
+
         <section xml:id="internalfunc-contextvar-localtime">
             <info>
                 <title>LOCALTIME</title>
@@ -714,12 +713,12 @@ END
                     <keyword>LOCALTIME</keyword>
                 </keywordset>
             </info>
-            
+
             <indexterm><primary>LOCALTIME</primary></indexterm>
-            
+
             <formalpara>
                 <title>Доступно в:</title>
-                
+
                 <para>DSQL, PSQL, ESQL.</para>
             </formalpara>
             <formalpara>
@@ -757,24 +756,24 @@ LOCALTIME [(<replaceable>&lt;precision&gt;</replaceable>)]
                     </tgroup>
                 </table>
             </para>
-            
+
             <formalpara>
                 <title>Тип возвращаемого результата:</title>
                 <para>TIME</para>
             </formalpara>
-            
+
             <para>Переменная LOCALTIME возвращает текущее время сервера. Точность определяет,
                 сколько учитывать знаков после запятой в долях секунды. Точность по умолчанию равна
                 0.</para>
-            
+
             <note>
-                <para>В блоке кода PSQL (процедура, триггер, исполняемый блок) значение LOCALTIME
-                    не меняется по мере выполнения. При вызове вложенного кода, значение также не
+                <para>В блоке кода PSQL (процедура, триггер, исполняемый блок) значение LOCALTIME не
+                    меняется по мере выполнения. При вызове вложенного кода, значение также не
                     изменится и будет равно значению в коде самого верхнего уровня. Для определения
                     реального времени используйте другие переменные, например 'NOW' (с полным
                     приведением типа данных). </para>
             </note>
-            
+
             <formalpara>
                 <title>Примеры:</title>
                 <para>
@@ -787,38 +786,39 @@ SELECT LOCALTIME(2) FROM RDB$DATABASE;
                     </example>
                 </para>
             </formalpara>
-            
+
             <warning>
                 <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
                 <para>В рамках этой поддержки будет возникать несовместимость с выражением
-                    <code>CURRENT_TIME</code> предыдущих версий.</para>
+                        <code>CURRENT_TIME</code> предыдущих версий.</para>
                 <para>В Firebird 4.0 выражение <code>CURRENT_TIME</code> будет возвращать тип данных
-                    <code>TIME WITH TIME ZONE</code>.</para>
+                        <code>TIME WITH TIME ZONE</code>.</para>
                 <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
                     версий, начиная с Firebird 3.0.4 вы можете использовать выражение
-                    <code>LOCALTIME</code>. В 3.0 <code>LOCALTIME</code> является синонимом
-                    <code>CURRENT_TIME</code>.</para>
+                        <code>LOCALTIME</code>. В 3.0 <code>LOCALTIME</code> является синонимом
+                        <code>CURRENT_TIME</code>.</para>
                 <para>В Firebird 4.0 <code>LOCALTIME</code> будет продолжать работать точно так же
                     как сейчас, в то время как <code>CURRENT_TIME</code> будет возвращать другой тип
                     данных.</para>
-                
+
                 <para>Вам не следует начинать использовать <code>LOCALTIME</code>, если можете
                     произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
                     версии, поскольку старые версии Firebird не смогут распознать новые
                     выражения.</para>
             </warning>
-            
+
             <formalpara>
                 <title>См. также:</title>
-                
+
                 <para>
-                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
-                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>, 
-                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. </para>
+                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, <link
+                        linkend="internalfunc-contextvar-now">'NOW'</link>, <link
+                        linkend="internalfunc-contextvar-current_timestamp"
+                    >CURRENT_TIMESTAMP</link>, <link linkend="internalfunc-contextvar-current_date"
+                        >CURRENT_DATE</link>. </para>
             </formalpara>
-        </section>    
-        
+        </section>
+
         <section xml:id="internalfunc-contextvar-localtimestamp">
             <info>
                 <title>LOCALTIMESTAMP</title>
@@ -826,15 +826,15 @@ SELECT LOCALTIME(2) FROM RDB$DATABASE;
                     <keyword>LOCALTIMESTAMP</keyword>
                 </keywordset>
             </info>
-            
+
             <indexterm><primary>LOCALTIMESTAMP</primary></indexterm>
-            
+
             <formalpara>
                 <title>Доступно в:</title>
-                
+
                 <para>DSQL, PSQL, ESQL.</para>
             </formalpara>
-            
+
             <formalpara>
                 <title>Синтаксис:</title>
                 <para>
@@ -870,12 +870,12 @@ LOCALTIMESTAMP [(<replaceable>&lt;precision&gt;</replaceable>)]
                     </tgroup>
                 </table>
             </para>
-            
+
             <formalpara>
                 <title>Тип возвращаемого результата:</title>
                 <para>TIMESTAMP</para>
             </formalpara>
-            
+
             <para>Переменная LOCALTIMESTAMP возвращает текущую дату и время сервера. Точность
                 определяет, сколько учитывать знаков после запятой в долях секунды. Точность по
                 умолчанию равна 3.</para>
@@ -886,7 +886,7 @@ LOCALTIMESTAMP [(<replaceable>&lt;precision&gt;</replaceable>)]
                     уровня. Для определения реального времени используйте другие переменные,
                     например 'NOW' (с полным приведением типа данных). </para>
             </note>
-            
+
             <formalpara>
                 <title>Примеры:</title>
                 <para>
@@ -899,39 +899,39 @@ SELECT LOCALTIMESTAMP(2) FROM RDB$DATABASE;
                     </example>
                 </para>
             </formalpara>
-            
+
             <warning>
                 <para>Firebird 4.0 будет поддерживать часовые пояса.</para>
                 <para>В рамках этой поддержки будет возникать несовместимость с выражением
-                    <code>CURRENT_TIMESTAMP</code> предыдущих версий.</para>
+                        <code>CURRENT_TIMESTAMP</code> предыдущих версий.</para>
                 <para>В Firebird 4.0 выражение <code>CURRENT_TIMESTAMP</code> будет возвращать тип
                     данных <code>TIMESTAMP WITH TIME ZONE</code>.</para>
                 <para>Для того чтобы ваши запросы были совместимы с кодом баз данных будующих
                     версий, начиная с Firebird 3.0.4 вы можете использовать выражение
-                    <code>LOCALTIMESTAMP</code>. В 3.0 <code>LOCALTIMESTAMP</code> является
+                        <code>LOCALTIMESTAMP</code>. В 3.0 <code>LOCALTIMESTAMP</code> является
                     синонимом <code>CURRENT_TIMESTAMP</code>.</para>
                 <para>В Firebird 4.0 <code>LOCALTIMESTAMP</code> будет продолжать работать точно так
                     же как сейчас, в то время как <code>CURRENT_TIMESTAMP</code> будет возвращать
                     другой тип данных.</para>
-                
+
                 <para>Вам не следует начинать использовать <code>LOCALTIMESTAMP</code>, если можете
                     произвести даунгрейд вашей базы данных до версии 3.0.3 или другой более младшей
                     версии, поскольку старые версии Firebird не смогут распознать новые
                     выражения.</para>
             </warning>
-            
+
             <formalpara>
                 <title>См. также:</title>
-                
+
                 <para>
-                    <link linkend="internalfunc-contextvar-current_timestamp">CURRENT_TIMESTAMP</link>,
-                    <link linkend="internalfunc-contextvar-now">'NOW'</link>, 
-                    <link linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, 
-                    <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>. 
-                </para>
+                    <link linkend="internalfunc-contextvar-current_timestamp"
+                        >CURRENT_TIMESTAMP</link>, <link linkend="internalfunc-contextvar-now"
+                        >'NOW'</link>, <link linkend="internalfunc-contextvar-current_time"
+                        >CURRENT_TIME</link>, <link linkend="internalfunc-contextvar-current_date"
+                        >CURRENT_DATE</link>. </para>
             </formalpara>
-        </section>        
-        
+        </section>
+
         <section xml:id="internalfunc-contextvar-new">
             <info>
                 <title>NEW</title>
@@ -7472,8 +7472,9 @@ COALESCE(<replaceable>expr1</replaceable>, <replaceable>expr2</replaceable> [, <
 
                 <formalpara>
                     <title>Тип возвращаемого результата:</title>
-                    <para>тот же что и первый аргумент функции
-                        <replaceable>expr1</replaceable>.</para>
+                    <para>тот же что и первый аргумент функции <replaceable>expr1</replaceable>,
+                        если все выражения имеют одинаковый тип, в противном случае происходит
+                        преобразование в тип с наибольшей вместимостью.</para>
                 </formalpara>
 
                 <para>Функция COALESCE принимает два или более аргумента возвращает значение первого
@@ -7609,7 +7610,10 @@ END
 
                 <formalpara>
                     <title>Тип возвращаемого результата:</title>
-                    <para>тот же что и первый результат <replaceable>result1</replaceable>.</para>
+                    <para>тот же что и первый результат <replaceable>result1</replaceable>, если все
+                        выражения <replaceable>result</replaceable> имеют одинаковый тип, в
+                        противном случае происходит преобразование в тип с наибольшей
+                        вместимостью.</para>
                 </formalpara>
 
                 <para>Данная функция эквивалентна конструкции <link
@@ -7716,7 +7720,10 @@ IIF(<replaceable>&lt;condition&gt;</replaceable>, <replaceable>resultT</replacea
 
                 <formalpara>
                     <title>Тип возвращаемого результата:</title>
-                    <para>тот же что и аргумент функции <replaceable>resultT</replaceable>.</para>
+                    <para>тот же что и аргумент функции <replaceable>resultT</replaceable>, если
+                        выражения <replaceable>resultT</replaceable> и
+                            <replaceable>resultF</replaceable> имеют одинаковый тип, в противном
+                        случае происходит преобразование в тип с наибольшей вместимостью.</para>
                 </formalpara>
 
                 <para>Функция IIF имеет три аргумента. Если первый аргумент является истиной, то
