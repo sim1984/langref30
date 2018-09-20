@@ -6732,16 +6732,17 @@ END
                         подтверждении или откате. Не перехваченные исключения обрабатываются в
                         зависимости от типа события: <itemizedlist spacing="compact">
                             <listitem>
-                                <para>для события TRANSACTION START исключение возвращается клиенту, а
-                                    транзакция отменяется;</para>
+                                <para>для события TRANSACTION START исключение возвращается клиенту,
+                                    а транзакция отменяется;</para>
                             </listitem>
                             <listitem>
-                                <para>для события TRANSACTION COMMIT исключение возвращается клиенту, действия,
-                                    выполненные триггером, и транзакция отменяются;</para>
+                                <para>для события TRANSACTION COMMIT исключение возвращается
+                                    клиенту, действия, выполненные триггером, и транзакция
+                                    отменяются;</para>
                             </listitem>
                             <listitem>
-                                <para>для события TRANSACTION ROLLBACK исключение не возвращается клиенту, а
-                                    транзакция, как и предусмотрено, отменяется.</para>
+                                <para>для события TRANSACTION ROLLBACK исключение не возвращается
+                                    клиенту, а транзакция, как и предусмотрено, отменяется.</para>
                             </listitem>
                         </itemizedlist>
                     </para>
@@ -9586,6 +9587,13 @@ RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation<
                     некорректными. Информация о том, как это обнаружить, находится в приложении
                         <link linkend="valid">Поле RDB$VALID_BLR</link>. </para>
             </note>
+            <warning>
+                <para>Если у вас уже есть внешняя функция в Legacy стиле (<code>DECLARE EXTERNAL
+                        FUNCTION</code>), то оператор <code>ALTER FUNCTION</code> изменит её на
+                    обычную функцию без всяких предупреждений. Это было сделано умышлено для
+                    облегчения миграции на новый стиль написания внешних функций известных как
+                    UDR.</para>
+            </warning>
             <section xml:id="ddl-function-alter-who">
                 <title>Кто может изменить функцию?</title>
 
@@ -9681,6 +9689,14 @@ RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation<
                 функцию. Если хранимая функция не существует, то она будет создана с использованием
                 предложения CREATE FUNCTION. Если она уже существует, то она будет изменена и
                 перекомпилирована, при этом существующие привилегии и зависимости сохраняются. </para>
+
+            <warning>
+                <para>Если у вас уже есть внешняя функция в Legacy стиле (<code>DECLARE EXTERNAL
+                        FUNCTION</code>), то оператор <code>CREATE OR ALTER FUNCTION</code> изменит
+                    её на обычную функцию без всяких предупреждений. Это было сделано умышлено для
+                    облегчения миграции на новый стиль написания внешних функций известных как
+                    UDR.</para>
+            </warning>
 
             <section xml:id="ddl-function-createoralter-examples">
                 <title>Примеры</title>
@@ -10825,8 +10841,8 @@ END
                                 </row>
                                 <row>
                                     <entry><replaceable>extbody</replaceable></entry>
-                                    <entry>Тело внешней процедуры/функции. Строковый литерал который может
-                                        использоваться UDR для различных целей.</entry>
+                                    <entry>Тело внешней процедуры/функции. Строковый литерал который
+                                        может использоваться UDR для различных целей.</entry>
                                 </row>
                                 <row>
                                     <entry><replaceable>declarations</replaceable></entry>
