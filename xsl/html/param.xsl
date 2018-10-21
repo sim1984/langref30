@@ -10,7 +10,11 @@
     <xsl:param name="monospace.font.family" select="'Courier New'"/>
     <xsl:param name="title.font.family" select="'Arial'"/>
     
+    <xsl:param name="default.encoding" select="'UTF-8'"/>
     <xsl:param name="chunker.output.encoding" select="'UTF-8'"/>
+    <xsl:param name="htmlhelp.encoding" select="'UTF-8'"/>
+    <xsl:param name="saxon.character.representation" select="'native;decimal'"/>
+    
 
     <!-- Index / ToC -->
     <xsl:param name="generate.index">1</xsl:param>
@@ -58,7 +62,7 @@
 
 	<xsl:param name="highlight.source" select="1"/>
     <xsl:param name="highlight.xslthl.config"
-        >file:/g:/fbdoc/langref30/xsl/highlighting/xslthl-config.xml</xsl:param>
+        >file:/G:/fbdoc/langref30/xsl/highlighting/xslthl-config.xml</xsl:param>
 
     <!-- Подсветка строк в теге programlising language="sql" -->
     <xsl:template match="xslthl:string" mode="xslthl">
