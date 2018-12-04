@@ -2635,6 +2635,44 @@ S
                         linkend="psql-operators-continue">CONTINUE</link>.</para>
             </formalpara>
         </section>
+        <section xml:id="psql-statements-break">
+            <info>
+                <title>BREAK</title>
+                <keywordset>
+                    <keyword>BREAK</keyword>
+                </keywordset>
+            </info>
+
+            <indexterm><primary>BREAK</primary></indexterm>
+            <formalpara>
+                <title>Назначение:</title>
+
+                <para>Выход из цикла.</para>
+            </formalpara>
+
+            <formalpara>
+                <title>Синтаксис:</title>
+
+                <para><programlisting>
+{FOR <replaceable>&lt;select_stmt&gt;</replaceable> | WHILE (<replaceable>&lt;condition&gt;</replaceable>)} DO
+BEGIN
+  ...
+  BREAK;
+  ...
+END
+                </programlisting></para>
+
+            </formalpara>
+
+            <para>Оператор BREAK моментально прекращает работу внутреннего цикла операторов WHILE
+                или FOR.</para>
+
+            <note>
+                <para>Этот оператор считается устаревшим. Начиная с Firebird 1.5 рекомендуется
+                    использовать SQL-99 совместимый оператор <link linkend="psql-statements-leave"
+                        >LEAVE</link>.</para>
+            </note>
+        </section>
         <section xml:id="psql-operators-leave">
             <info>
                 <title>LEAVE</title>
@@ -4925,7 +4963,7 @@ exception 1
                 </warning>
 
                 <para>Исключение может быть обработано в операторе <link
-                    linkend="psql-operators-when">WHEN ... DO</link>. Если пользовательское
+                        linkend="psql-operators-when">WHEN ... DO</link>. Если пользовательское
                     исключение не было обработано в триггере или в хранимой процедуре, то действия,
                     выполненные внутри этой хранимой процедуры (триггера) отменяются, а вызвавшая
                     программа получает текст, заданный при создании исключения или альтернативный

@@ -55,7 +55,7 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>file:/g:/fbdoc/langref30/xsl/html.xsl</String>
+                                    <String>file:/d:/fbdoc/langref30/xsl/html.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
                                     <String>${currentFileURL}</String>
@@ -166,7 +166,7 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>file:/g:/fbdoc/langref30/xsl/monohtml.xsl</String>
+                                    <String>file:/d:/fbdoc/langref30/xsl/monohtml.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
                                     <String>${currentFileURL}</String>
@@ -277,7 +277,7 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>file:/g:/fbdoc/langref30/xsl/fo.xsl</String>
+                                    <String>file:/d:/fbdoc/langref30/xsl/fo.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
                                     <String>${currentFileURL}</String>
