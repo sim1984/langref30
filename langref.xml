@@ -11,7 +11,7 @@
     <info>
         <title>Руководство по языку SQL СУБД Firebird 3.0</title>
         <subtitle>Firebird 3.0.4</subtitle>
-        <edition>4 декабря 2018 — v.0056-1</edition>
+        <edition>6 марта 2019 — v.0057-1</edition>
 
         <authorgroup>
             <author>
@@ -41,7 +41,7 @@
             <publishername>Firebird Project</publishername>
         </publisher>
         <copyright>
-            <year>2018</year>
+            <year>2019</year>
             <holder>Firebird Project и все авторы, в соответствии с лицензией <link
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xlink:href="http://www.firebirdsql.org/manual/pdl.html">Public Documentation
