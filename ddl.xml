@@ -3498,15 +3498,26 @@ CREATE GLOBAL TEMPORARY TABLE <replaceable>name</replaceable>
                     </para>
                 </formalpara>
 
+                <para>Если в операторе создания глобальной временной таблицы указано необязательное
+                    предложение <database>ON COMMIT DELETE ROWS</database>, то будет создана GTT
+                    транзакционного уровня (по умолчанию). При указании предложения <database>ON
+                        COMMIT PRESERVE ROWS</database> — будет создана GTT уровня соединения с
+                    базой данных.</para>
+                <para>Предложение EXTERNAL [FILE] нельзя использовать для глобальной временной
+                    таблицы.</para>
+
                 <note>
-                    <para>Если в операторе создания глобальной временной таблицы указано
-                        необязательное предложение <database>ON COMMIT DELETE ROWS</database>, то
-                        будет создана GTT транзакционного уровня (по умолчанию). При указании
-                        предложения <database>ON COMMIT PRESERVE ROWS</database> — будет создана GTT
-                        уровня соединения с базой данных.</para>
-                    <para>Предложение EXTERNAL [FILE] нельзя использовать для глобальной временной
-                        таблицы.</para>
+                    <para>Операторы <database>COMMIT RETAINING</database> и <database>ROLLBACK
+                            RETAINING</database> сохраняют данные в глобальных временных таблицах
+                        объявленных как <database>ON COMMIT DELETE ROWS</database>. В Firebird 2.x и
+                        до версии 3.0.5 была ошибка: <database>COMMIT RETAINING</database> и
+                            <database>ROLLBACK RETAINING</database> делали записи не видимыми для
+                        текущей транзакции. Для возврата поведения 2.x установить параметр
+                            <parameter>ClearGTTAtRetaining</parameter> равным 1 в
+                            <filename>firebird.conf</filename>. Этот параметр может быть удалён в
+                        Firebird 5.0.</para>
                 </note>
+
                 <section>
                     <title>Ограничения GTT</title>
                     <para>GTT обаладают всеми атрибутами обычных таблиц (ключи, внешние ключи,
@@ -3627,7 +3638,7 @@ CREATE GLOBAL TEMPORARY TABLE MYTXGTT (
                                                 корневого каталога Firebird. </para>
                                         </listitem>
                                         <listitem>
-                                            <para><function>ExternalFileAccess =
+                                            <para><function>ExternalFileAccess = Restrict
                                                   d:\databases\outfiles; e:\infiles</function>
                                                 ограничит доступ только двумя директориями Windows.
                                                 Обратите внимание, что любые пути являющиеся
