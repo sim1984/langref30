@@ -55,12 +55,6 @@
                         <entry>Тип данных доступен только в 3 диалекте.</entry>
                     </row>
                     <row>
-                        <entry>BOOLEAN</entry>
-                        <entry>8 бит</entry>
-                        <entry>false, true, unknown</entry>
-                        <entry>Логический тип данных.</entry>
-                    </row>
-                    <row>
                         <entry>BLOB</entry>
                         <entry>Переменный</entry>
                         <entry>Нет. Размер сегмента BLOB ограничивается 64К. Максимальный размер
@@ -70,6 +64,12 @@
                             данных, таких как графика, тексты, оцифрованные звуки. Базовая
                             структурная единица — сегмент. Подтип Blob описывает содержимое.
                         </entry>
+                    </row>
+                    <row>
+                        <entry>BOOLEAN</entry>
+                        <entry>8 бит</entry>
+                        <entry>false, true, unknown</entry>
+                        <entry>Логический тип данных.</entry>
                     </row>
                     <row>
                         <entry>
@@ -145,6 +145,14 @@
                             precision. Число с десятичной точкой, имеющей после точки scale
                             разрядов. Пример: NUMERIC(10,3) содержит число точно в следующем
                             формате: ppppppp.sss.</entry>
+                    </row>
+                    <row>
+                        <entry>REAL</entry>
+                        <entry>32 бита</entry>
+                        <entry>1,175 x 10<superscript>-38</superscript> .. 3,402 x
+                                10<superscript>38</superscript>
+                        </entry>
+                        <entry>Является синонимом типа FLOAT.</entry>
                     </row>
                     <row>
                         <entry>SMALLINT</entry>
@@ -346,6 +354,46 @@ INSERT INTO MYBIGINTS VALUES (
             <indexterm><primary>FLOAT</primary></indexterm>
             <para>Данный тип данных обладает приблизительной точностью 7 цифр после запятой. Для
                 обеспечения надёжности хранения полагайтесь на 6 цифр.</para>
+
+            <section xml:id="types-float-float-precision">
+                <info>
+                    <title>FLOAT с указанием точности</title>
+                </info>
+
+                <para>У типа FLOAT может быть указана точность в десятичных числах
+                    <programlisting>
+FLOAT(<replaceable>p</replaceable>)                        
+                    </programlisting>
+                </para>
+
+                <para>Указанная точность <replaceable>p</replaceable> влияет на способ хранения
+                    числа. <itemizedlist>
+                        <listitem>
+                            <para>0 &lt;= p &lt;= 7 — 32-битное одинарной точности (синоним типа
+                                FLOAT)</para>
+                        </listitem>
+                        <listitem>
+                            <para>p > 7 — 64-битное двойной точности (синоним типа DOUBLE
+                                PRECISION)</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+
+                <warning>
+                    <para>FLOAT с указанием точности в десятичных числах не соответствует SQL
+                        стандарту. Согласно стандарту точность для типа FLOAT указывается в двоичных
+                        числах. В Firebird 4.0 это поведение изменено для согласования со
+                        стандартом. Данный синтаксис не был документирован ранее. </para>
+                </warning>
+            </section>
+        </section>
+        <section xml:id="types-float-real">
+            <info>
+                <title>REAL</title>
+            </info>
+            <indexterm><primary>REAL</primary></indexterm>
+
+            <para>Тип REAL является синонимом типа FLOAT.</para>
         </section>
         <section xml:id="types-float-double">
             <info>
@@ -353,6 +401,36 @@ INSERT INTO MYBIGINTS VALUES (
             </info>
             <indexterm><primary>DOUBLE PRECISION</primary></indexterm>
             <para>При хранении данных, предполагается приблизительная точность 15 цифр.</para>
+        </section>
+        
+        <section xml:id="types-float-long_float">
+            <info>
+                <title>LONG FLOAT</title>
+            </info>
+            <indexterm><primary>LONG FLOAT</primary></indexterm>
+            
+            <formalpara>
+                <title>Синтаксис:</title>
+                <para>
+                    <literallayout class="monospaced">
+LONG FLOAT[(<replaceable>&lt;precision&gt;</replaceable>)]                    
+</literallayout>
+                </para>
+            </formalpara>
+            
+            <para>Тип LONG FLOAT является синонимом типа DOUBLE PRECISION. У этого типа может быть
+                указана точность в десятичных числах. Указанная точность не влияет на способ
+                хранения — число всегда храниться как 64-битное двойной точности.</para>
+            
+            <note>
+                <para>В Firebird 4.0 точность указывается в двоичных числах для согласования со
+                    стандартом относительно типа FLOAT.</para>
+            </note>
+            
+            <warning>
+                <para> Эти нестандартные имена типов устарели и могут быть удалены в будущей
+                    версии.</para>
+            </warning>
         </section>
     </section>
     <section xml:id="types-fixed">
