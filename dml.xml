@@ -4252,7 +4252,7 @@ FROM ...
             <para>Простой оператор SELECT может быть использован в PSQL, только если он возвращает
                 не более одной строки, то есть, если это запрос типа singleton (одиночка). Для
                 запросов, возвращающих несколько строк, PSQL предлагает использовать оператор <link
-                    linkend="psql-operators-forselect">FOR SELECT</link>.  </para>
+                    linkend="psql-statements-forselect">FOR SELECT</link>.  </para>
             
             <important>
                 <para>В случае, когда запрос не возвращает данных (ноль строк), значение переменных
@@ -4260,7 +4260,7 @@ FROM ...
                     изменяется.</para>
             </important>
             
-            <para>Также, PSQL поддерживает оператор <link linkend="psql-operators-declare-cursor"
+            <para>Также, PSQL поддерживает оператор <link linkend="psql-statements-declare-cursor"
                     >DECLARE CURSOR</link>, который связывает именованный курсор с определенной
                 командой SELECT — и этот курсор впоследствии может быть использован для навигации по
                 возвращаемому набору данных.</para>
@@ -6566,7 +6566,7 @@ END
             <title>См. также:</title>
 
             <para>
-                <link linkend="psql-operators">Операторы языка PSQL</link>. </para>
+                <link linkend="psql-statements">Операторы языка PSQL</link>. </para>
         </formalpara>
         <section xml:id="dml-execblock-inoutparams">
             <title>Входные и выходные параметры</title>
@@ -6591,7 +6591,7 @@ END
                 одна строка. </para>
             <para>Для получения дополнительной информации о параметрах и объявлениях переменных,
                 [TYPE OF] <replaceable>domain</replaceable>, TYPE OF COLUMN и т.д. обратитесь к
-                главе <link linkend="psql-operators-declare">DECLARE</link>.</para>
+                главе <link linkend="psql-statements-declare">DECLARE</link>.</para>
         </section>
         <section xml:id="dml-execblock-term">
             <title>Терминатор оператора</title>

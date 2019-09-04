@@ -246,7 +246,7 @@ SET TERM ;^
                     SELECT запросов. Обычно такие процедуры выполняют циклический процесс извлечения
                     данных, возможно преобразуя их, прежде чем заполнить выходные переменные
                     (параметры) новыми данными на каждой итерации цикла. Оператор <link
-                        linkend="psql-operators-suspend">SUSPEND</link>, обычно расположенный в
+                        linkend="psql-statements-suspend">SUSPEND</link>, обычно расположенный в
                     конце каждой итерации, заполняет буфер и ожидает пока вызывающая сторона не
                     выберет (fetch) строку.</para>
                 <para>Селективные процедуры могут иметь входные параметры и выходное множество,
@@ -1346,7 +1346,7 @@ DROP TRIGGER <replaceable>trigname</replaceable>;
         </section>
     </section>
 
-    <section xml:id="psql-operators">
+    <section xml:id="psql-statements">
         <info>
             <title>Написание кода тела модуля</title>
         </info>
@@ -1362,7 +1362,7 @@ DROP TRIGGER <replaceable>trigname</replaceable>;
                 переменных.</para>
         </sidebar>
 
-        <section xml:id="psql-operators-assign">
+        <section xml:id="psql-statements-assign">
             <title>Оператор присваивания</title>
 
             <formalpara>
@@ -1462,10 +1462,10 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-declare-var">DECLARE VARIABLE</link>. </para>
+                    <link linkend="psql-statements-declare-var">DECLARE VARIABLE</link>. </para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-declare">
+        <section xml:id="psql-statements-declare">
             <info>
                 <title>DECLARE</title>
                 <keywordset>
@@ -1497,7 +1497,7 @@ DECLARE {<replaceable>&lt;local_var&gt;</replaceable> | <replaceable>&lt;cursor&
                 подпрограммы (подпроцедуры или подфункции). Каждый тип объявления будет рассмотрен
                 отдельно.</para>
 
-            <section xml:id="psql-operators-declare-var">
+            <section xml:id="psql-statements-declare-var">
                 <info>
                     <title>DECLARE VARIABLE</title>
                     <keywordset>
@@ -1742,7 +1742,7 @@ END
                     </formalpara>
                 </section>
             </section>
-            <section xml:id="psql-operators-declare-cursor">
+            <section xml:id="psql-statements-declare-cursor">
                 <info>
                     <title>DECLARE CURSOR</title>
                     <keywordset>
@@ -1933,14 +1933,14 @@ END
                         <title>См. также:</title>
 
                         <para>
-                            <link linkend="psql-operators-open">OPEN</link>, <link
-                                linkend="psql-operators-fetch">FETCH</link>, <link
-                                linkend="psql-operators-close">CLOSE</link>, <link
-                                linkend="psql-operators-forselect">FOR SELECT</link>. </para>
+                            <link linkend="psql-statements-open">OPEN</link>, <link
+                                linkend="psql-statements-fetch">FETCH</link>, <link
+                                linkend="psql-statements-close">CLOSE</link>, <link
+                                linkend="psql-statements-forselect">FOR SELECT</link>. </para>
                     </formalpara>
                 </section>
             </section>
-            <section xml:id="psql-operators-declare-procedure">
+            <section xml:id="psql-statements-declare-procedure">
                 <info>
                     <title>DECLARE PROCEDURE</title>
                     <keywordset>
@@ -2111,11 +2111,11 @@ END^
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="psql-operators-declare-function">DECLARE FUNCTION</link>,
+                        <link linkend="psql-statements-declare-function">DECLARE FUNCTION</link>,
                             <link linkend="ddl-procedure-create">CREATE PROCEDURE</link>.</para>
                 </formalpara>
             </section>
-            <section xml:id="psql-operators-declare-function">
+            <section xml:id="psql-statements-declare-function">
                 <info>
                     <title>DECLARE FUNCTION</title>
                     <keywordset>
@@ -2258,12 +2258,12 @@ END ^
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="psql-operators-declare-procedure">DECLARE PROCEDURE</link>,
+                        <link linkend="psql-statements-declare-procedure">DECLARE PROCEDURE</link>,
                             <link linkend="ddl-function-create">CREATE FUNCTION</link>.</para>
                 </formalpara>
             </section>
         </section>
-        <section xml:id="psql-operators-beginend">
+        <section xml:id="psql-statements-beginend">
             <info>
                 <title>BEGIN ... END</title>
                 <keywordset>
@@ -2388,13 +2388,13 @@ SET TERM ;^
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-exit">EXIT</link>, <link
-                        linkend="psql-operators-leave">LEAVE</link>, <link linkend="psql-setterm"
+                    <link linkend="psql-statements-exit">EXIT</link>, <link
+                        linkend="psql-statements-leave">LEAVE</link>, <link linkend="psql-setterm"
                         >SET TERM</link>.</para>
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-if">
+        <section xml:id="psql-statements-if">
             <info>
                 <title>IF ... THEN ... ELSE</title>
                 <keywordset>
@@ -2520,11 +2520,11 @@ ELSE
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-while">WHILE ... DO</link>, <link
+                    <link linkend="psql-statements-while">WHILE ... DO</link>, <link
                         linkend="common-expr-cond-case">CASE</link>.</para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-while">
+        <section xml:id="psql-statements-while">
             <info>
                 <title>WHILE ... DO</title>
                 <keywordset>
@@ -2629,10 +2629,10 @@ S
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-forselect">FOR SELECT</link>, <link
-                        linkend="psql-operators-forexec">FOR EXECUTE STATEMENT</link>, <link
-                        linkend="psql-operators-leave">LEAVE</link>, <link
-                        linkend="psql-operators-continue">CONTINUE</link>.</para>
+                    <link linkend="psql-statements-forselect">FOR SELECT</link>, <link
+                        linkend="psql-statements-forexec">FOR EXECUTE STATEMENT</link>, <link
+                        linkend="psql-statements-leave">LEAVE</link>, <link
+                        linkend="psql-statements-continue">CONTINUE</link>.</para>
             </formalpara>
         </section>
         <section xml:id="psql-statements-break">
@@ -2673,7 +2673,7 @@ END
                         >LEAVE</link>.</para>
             </note>
         </section>
-        <section xml:id="psql-operators-leave">
+        <section xml:id="psql-statements-leave">
             <info>
                 <title>LEAVE</title>
                 <keywordset>
@@ -2813,11 +2813,11 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-exit">EXIT</link>, <link
-                        linkend="psql-operators-continue">CONTINUE</link>.</para>
+                    <link linkend="psql-statements-exit">EXIT</link>, <link
+                        linkend="psql-statements-continue">CONTINUE</link>.</para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-continue">
+        <section xml:id="psql-statements-continue">
             <info>
                 <title>CONTINUE</title>
                 <keywordset>
@@ -2919,10 +2919,10 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-leave">LEAVE</link>.</para>
+                    <link linkend="psql-statements-leave">LEAVE</link>.</para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-exit">
+        <section xml:id="psql-statements-exit">
             <info>
                 <title>EXIT</title>
                 <keywordset>
@@ -2987,11 +2987,11 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-leave">LEAVE</link>, <link
-                        linkend="psql-operators-suspend">SUSPEND</link>.</para>
+                    <link linkend="psql-statements-leave">LEAVE</link>, <link
+                        linkend="psql-statements-suspend">SUSPEND</link>.</para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-suspend">
+        <section xml:id="psql-statements-suspend">
             <info>
                 <title>SUSPEND</title>
                 <keywordset>
@@ -3077,11 +3077,11 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-exit">EXIT</link>.</para>
+                    <link linkend="psql-statements-exit">EXIT</link>.</para>
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-execstmt">
+        <section xml:id="psql-statements-execstmt">
             <info>
                 <title>EXECUTE STATEMENT</title>
                 <keywordset>
@@ -3266,13 +3266,13 @@ END
             <para>Оператор EXECUTE STATEMENT принимает строковый параметр и выполняет его, как будто
                 это оператор DSQL. Если оператор возвращает данные, то с помощью предложения INTO их
                 можно передать в локальные переменные.</para>
-            <section xml:id="psql-operators-execstmt-wparams">
+            <section xml:id="psql-statements-execstmt-wparams">
                 <title>Параметризованные операторы</title>
 
                 <para>В DSQL операторе можно использовать параметры. Параметры могут быть
                     именованными и позиционными (безымянные). Значение должно быть присвоено каждому
                     параметру.</para>
-                <section xml:id="psql-operators-execstmt-wparams01">
+                <section xml:id="psql-statements-execstmt-wparams01">
                     <title>Особенности использования параметризованных операторов</title>
                     <para><orderedlist spacing="compact">
                             <listitem>
@@ -3395,7 +3395,7 @@ BEGIN
                     </formalpara>
                 </section>
             </section>
-            <section xml:id="psql-operators-execstmt-wautonomous">
+            <section xml:id="psql-statements-execstmt-wautonomous">
                 <info>
                     <title>WITH {AUTONOMOUS | COMMON} TRANSACTION</title>
                     <keywordset>
@@ -3426,7 +3426,7 @@ BEGIN
                     Любые новые транзакции, запущенные в режиме &quot;COMMON&quot;, подтверждаются
                     или откатываются вместе с текущей транзакцией.</para>
             </section>
-            <section xml:id="psql-operators-execstmt-wcaller">
+            <section xml:id="psql-statements-execstmt-wcaller">
                 <info>
                     <title>WITH CALLER PRIVILEGES</title>
                     <keywordset>
@@ -3445,7 +3445,7 @@ BEGIN
                     непосредственно подпрограммой. WITH CALLER PRIVILEGES не имеет никакого эффекта,
                     если также присутствует предложение ON EXTERNAL.</para>
             </section>
-            <section xml:id="psql-operators-execstmt-onexternal">
+            <section xml:id="psql-statements-execstmt-onexternal">
                 <info>
                     <title>ON EXTERNAL [DATA SOURCE]</title>
                     <keywordset>
@@ -3467,7 +3467,7 @@ BEGIN
                         сервере</link>.</para>
                 <para>При выполнении оператора в отдельном соединении используется пул соединений и
                     пул транзакций.</para>
-                <section xml:id="psql-operators-execstmt-onext-connpool">
+                <section xml:id="psql-statements-execstmt-onext-connpool">
                     <title>Особенности пула подключений (Connection pooling)</title>
                     <para><orderedlist spacing="compact">
                             <listitem>
@@ -3493,7 +3493,7 @@ BEGIN
                         </orderedlist>
                     </para>
                 </section>
-                <section xml:id="psql-operators-execstmt-onext-tranpool">
+                <section xml:id="psql-statements-execstmt-onext-tranpool">
                     <title>Особенности пула транзакций (Transaction pooling)</title>
                     <para><orderedlist spacing="compact">
                             <listitem>
@@ -3510,7 +3510,7 @@ BEGIN
                         </orderedlist>
                     </para>
                 </section>
-                <section xml:id="psql-operators-execstmt-onext-errhandling">
+                <section xml:id="psql-statements-execstmt-onext-errhandling">
                     <title>Особенности обработки исключений</title>
                     <para>При использовании предложения ON EXTERNAL дополнительное соединение всегда
                         делается через так называемого внешнего провайдера, даже если это соединение
@@ -3525,7 +3525,7 @@ BEGIN
                             соединение с текущей базой данных.</para>
                     </note>
                 </section>
-                <section xml:id="psql-operators-execstmt-onext-morenotes">
+                <section xml:id="psql-statements-execstmt-onext-morenotes">
                     <title>Другие замечания</title>
                     <para>
                         <itemizedlist spacing="compact">
@@ -3540,7 +3540,7 @@ BEGIN
                     </para>
                 </section>
             </section>
-            <section xml:id="psql-operators-execstmt-asuser">
+            <section xml:id="psql-statements-execstmt-asuser">
                 <info>
                     <title>AS USER, PASSWORD и ROLE</title>
                     <keywordset>
@@ -3648,11 +3648,11 @@ BEGIN
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="psql-operators-forexec">FOR EXECUTE STATEMENT</link>. </para>
+                        <link linkend="psql-statements-forexec">FOR EXECUTE STATEMENT</link>. </para>
                 </formalpara>
             </section>
         </section>
-        <section xml:id="psql-operators-forselect">
+        <section xml:id="psql-statements-forselect">
             <info>
                 <title>FOR SELECT</title>
                 <keywordset>
@@ -3748,7 +3748,7 @@ DO <replaceable>&lt;compound_statement&gt;</replaceable>
                 происходит выход из цикла. Цикл также может быть завершён до прочтения всех строк
                 при использовании оператора LEAVE.</para>
 
-            <section xml:id="psql-operators-forselect-cursor">
+            <section xml:id="psql-statements-forselect-cursor">
                 <title>Необъявленный курсор</title>
                 <para>Необязательное предложение AS CURSOR создаёт именованный курсор, на который
                     можно ссылаться (с использованием предложения WHERE CURRENT OF) внутри
@@ -3966,14 +3966,14 @@ END
 
                     <para>
                         <link linkend="dml-select">SELECT</link>, <link
-                            linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>, <link
-                            linkend="psql-operators-open">OPEN</link>, <link
-                            linkend="psql-operators-close">CLOSE</link>, <link
-                            linkend="psql-operators-fetch">FETCH</link>.</para>
+                            linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>, <link
+                            linkend="psql-statements-open">OPEN</link>, <link
+                            linkend="psql-statements-close">CLOSE</link>, <link
+                            linkend="psql-statements-fetch">FETCH</link>.</para>
                 </formalpara>
             </section>
         </section>
-        <section xml:id="psql-operators-forexec">
+        <section xml:id="psql-statements-forexec">
             <info>
                 <title>FOR EXECUTE STATEMENT</title>
                 <keywordset>
@@ -4073,10 +4073,10 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-execstmt">EXECUTE STATEMENT</link>. </para>
+                    <link linkend="psql-statements-execstmt">EXECUTE STATEMENT</link>. </para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-open">
+        <section xml:id="psql-statements-open">
             <info>
                 <title>OPEN</title>
                 <keywordset>
@@ -4136,7 +4136,7 @@ OPEN <replaceable>cursor_name</replaceable>;
             <para>Оператор OPEN открывает ранее объявленный курсор, выполняет объявленный в нем
                 оператор SELECT и получает записи из результирующего набора данных. Оператор OPEN
                 применим только к курсорам, объявленным в операторе <link
-                    linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>.</para>
+                    linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>.</para>
 
             <note>
                 <para>Если в операторе SELECT курсора имеются параметры, то они должны быть
@@ -4147,7 +4147,7 @@ OPEN <replaceable>cursor_name</replaceable>;
 
             <formalpara>
                 <title>Примеры:</title>
-                <para>См. примеры в операторе <link linkend="psql-operators-fetch"
+                <para>См. примеры в операторе <link linkend="psql-statements-fetch"
                     >FETCH</link>.</para>
             </formalpara>
 
@@ -4155,13 +4155,13 @@ OPEN <replaceable>cursor_name</replaceable>;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-fetch">FETCH</link>, <link
-                        linkend="psql-operators-close">CLOSE</link>, <link
-                        linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>. </para>
+                    <link linkend="psql-statements-fetch">FETCH</link>, <link
+                        linkend="psql-statements-close">CLOSE</link>, <link
+                        linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>. </para>
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-fetch">
+        <section xml:id="psql-statements-fetch">
             <info>
                 <title>FETCH</title>
                 <keywordset>
@@ -4483,12 +4483,12 @@ END
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-open">OPEN</link>, <link
-                        linkend="psql-operators-close">CLOSE</link>, <link
-                        linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>. </para>
+                    <link linkend="psql-statements-open">OPEN</link>, <link
+                        linkend="psql-statements-close">CLOSE</link>, <link
+                        linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>. </para>
             </formalpara>
         </section>
-        <section xml:id="psql-operators-close">
+        <section xml:id="psql-statements-close">
             <info>
                 <title>CLOSE</title>
                 <keywordset>
@@ -4549,11 +4549,11 @@ CLOSE <replaceable>cursor_name</replaceable>;
                 автоматически закрыты после выполнения кода триггера, хранимой процедуры, функции
                 или анонимного PSQL блока, в пределах кода которого он был открыт. Оператор CLOSE
                 применим только к курсорам, объявленным в операторе <link
-                    linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>.</para>
+                    linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>.</para>
 
             <formalpara>
                 <title>Примеры:</title>
-                <para>См. примеры в операторе <link linkend="psql-operators-fetch"
+                <para>См. примеры в операторе <link linkend="psql-statements-fetch"
                     >FETCH</link>.</para>
             </formalpara>
 
@@ -4561,13 +4561,13 @@ CLOSE <replaceable>cursor_name</replaceable>;
                 <title>См. также:</title>
 
                 <para>
-                    <link linkend="psql-operators-fetch">FETCH</link>, <link
-                        linkend="psql-operators-open">OPEN</link>, <link
-                        linkend="psql-operators-declare-cursor">DECLARE ... CURSOR</link>. </para>
+                    <link linkend="psql-statements-fetch">FETCH</link>, <link
+                        linkend="psql-statements-open">OPEN</link>, <link
+                        linkend="psql-statements-declare-cursor">DECLARE ... CURSOR</link>. </para>
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-antonomous">
+        <section xml:id="psql-statements-antonomous">
             <info>
                 <title>IN AUTONOMOUS TRANSACTION</title>
                 <keywordset>
@@ -4681,7 +4681,7 @@ END
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-post">
+        <section xml:id="psql-statements-post">
             <info>
                 <title>POST_EVENT</title>
                 <keywordset>
@@ -4763,7 +4763,7 @@ SET TERM ;^
             </formalpara>
         </section>
 
-        <section xml:id="psql-operators-handleexceptions">
+        <section xml:id="psql-statements-handleexceptions">
             <info>
                 <title>Обработка ошибок</title>
             </info>
@@ -4814,7 +4814,7 @@ SET TERM ;^
                     ошибку. </para>
             </section>
 
-            <section xml:id="psql-operators-exception">
+            <section xml:id="psql-statements-exception">
                 <info>
                     <title>EXCEPTION</title>
                     <keywordset>
@@ -4963,7 +4963,7 @@ exception 1
                 </warning>
 
                 <para>Исключение может быть обработано в операторе <link
-                        linkend="psql-operators-when">WHEN ... DO</link>. Если пользовательское
+                        linkend="psql-statements-when">WHEN ... DO</link>. Если пользовательское
                     исключение не было обработано в триггере или в хранимой процедуре, то действия,
                     выполненные внутри этой хранимой процедуры (триггера) отменяются, а вызвавшая
                     программа получает текст, заданный при создании исключения или альтернативный
@@ -5094,11 +5094,11 @@ END
 
                     <para>
                         <link linkend="ddl-exception-create">CREATE EXCEPTION</link>, <link
-                            linkend="psql-operators-when">WHEN ... DO</link>.</para>
+                            linkend="psql-statements-when">WHEN ... DO</link>.</para>
                 </formalpara>
             </section>
 
-            <section xml:id="psql-operators-when">
+            <section xml:id="psql-statements-when">
                 <info>
                     <title>WHEN ... DO</title>
                     <keywordset>
@@ -5228,7 +5228,7 @@ DO <replaceable>&lt;compound_statement&gt;</replaceable>
                             >CORE-4483</link>.</para>
                 </important>
 
-                <section xml:id="psql-operators-whendo-scope">
+                <section xml:id="psql-statements-whendo-scope">
                     <title>Область действия оператора WHEN ... DO</title>
 
                     <para>Оператор перехватывает ошибки и исключения в текущем блоке операторов. Он

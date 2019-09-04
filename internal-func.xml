@@ -1155,7 +1155,7 @@ ROW_COUNT
                             получена строка данных и 0 в противном случае;</para>
                     </listitem>
                     <listitem>
-                        <para>В цикле <link linkend="psql-operators-forselect">FOR SELECT</link>
+                        <para>В цикле <link linkend="psql-statements-forselect">FOR SELECT</link>
                             переменная ROW_COUNT увеличивается на каждой итерации (начиная с 0 в
                             качестве первого значения);</para>
                     </listitem>

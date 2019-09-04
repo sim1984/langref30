@@ -6590,8 +6590,8 @@ CREATE TRIGGER <replaceable>trigname</replaceable>
                     <title>Тело триггера</title>
                     <para>Тело триггера может содержать объявления локальных переменных и курсоров.
                         Подробности вы можете посмотреть в главе <quote>Процедурный язык
-                            PSQL</quote> в разделах <link linkend="psql-operators-declare-var"
-                            >DECLARE VARIABLE</link> и <link linkend="psql-operators-declare-cursor"
+                            PSQL</quote> в разделах <link linkend="psql-statements-declare-var"
+                            >DECLARE VARIABLE</link> и <link linkend="psql-statements-declare-cursor"
                             >DECLARE CURSOR</link>. </para>
 
                     <para>После секции объявления следует основной блок BEGIN ... END, в который
@@ -8232,17 +8232,17 @@ RETURNS (<replaceable>&lt;outparam&gt;</replaceable> [, <replaceable>&lt;outpara
                     переменные подчиняются тем же правилам что и входные и выходные параметры
                     процедуры в отношении спецификации типа данных. Подробности вы можете посмотреть
                     в главе <quote>Процедурный язык PSQL</quote> в разделах <link
-                        linkend="psql-operators-declare-var">DECLARE VARIABLE</link> и <link
-                        linkend="psql-operators-declare-cursor">DECLARE CURSOR</link>, <link
-                        linkend="psql-operators-declare-procedure">DECLARE PROCEDURE</link>, <link
-                        linkend="psql-operators-declare-function">DECLARE FUNCTION</link>.</para>
+                        linkend="psql-statements-declare-var">DECLARE VARIABLE</link> и <link
+                        linkend="psql-statements-declare-cursor">DECLARE CURSOR</link>, <link
+                        linkend="psql-statements-declare-procedure">DECLARE PROCEDURE</link>, <link
+                        linkend="psql-statements-declare-function">DECLARE FUNCTION</link>.</para>
 
 
                 <para>В необязательной секции <replaceable>declarations</replaceable> описаны
                     локальные переменные процедуры, именованные курсоры и подпрограммы (подпроцедуры
                     и подфункции). Локальные переменные подчиняются тем же правилам что и входные и
                     выходные параметры процедуры в отношении спецификации типа данных. Подробнее см.
-                    в разделе <link linkend="psql-operators-declare">DECLARE</link>. </para>
+                    в разделе <link linkend="psql-statements-declare">DECLARE</link>. </para>
                 <para>После заголовка следует тело хранимой процедуры, состоящее из одного или
                     нескольких PSQL операторов, заключенных между ключевыми словами BEGIN и END.
                     Внутри тела процедуры может быть множество BEGIN...END блоков, представляющих
@@ -9364,7 +9364,7 @@ SELECT n, fn_t() FROM t
                     локальные переменные процедуры, именованные курсоры и подпрограммы (подпроцедуры
                     и подфункции). Локальные переменные подчиняются тем же правилам что и входные и
                     выходные параметры процедуры в отношении спецификации типа данных. Подробнее см.
-                    в разделе <link linkend="psql-operators-declare">DECLARE</link>. </para>
+                    в разделе <link linkend="psql-statements-declare">DECLARE</link>. </para>
                 <para>После заголовка следует тело хранимой функции, состоящее из одного или
                     нескольких PSQL операторов, заключенных между ключевыми словами BEGIN и END.
                     Внутри тела процедуры может быть множество BEGIN...END блоков, представляющих
@@ -13009,8 +13009,8 @@ ALTER SEQUENCE EMP_NO_GEN RESTART WITH 145;
         </info>
         <para>Пользовательское исключение (exception) — объект базы данных, описывающий сообщение об
             ошибке. Исключение можно вызывать и обрабатывать в PSQL коде (см. <link
-                linkend="psql-operators-exception">EXCEPTION</link>, <link
-                linkend="psql-operators-when">WHEN … DO</link>).</para>
+                linkend="psql-statements-exception">EXCEPTION</link>, <link
+                linkend="psql-statements-when">WHEN … DO</link>).</para>
         <para>В данном разделе описываются операторы создания, модификации и удаления исключений. </para>
         <section xml:id="ddl-exception-create">
             <info>
@@ -13151,7 +13151,7 @@ CREATE EXCEPTION E_INVALID_VALUE
                             linkend="ddl-exception-createoralter">CREATE OR ALTER EXCEPTION</link>,
                             <link linkend="ddl-exception-drop">DROP EXCEPTION</link>, <link
                             linkend="ddl-exception-recreate">RECREATE EXCEPTION</link>, <link
-                            linkend="psql-operators-exception">EXCEPTION</link>. </para>
+                            linkend="psql-statements-exception">EXCEPTION</link>. </para>
                 </formalpara>
             </section>
         </section>
