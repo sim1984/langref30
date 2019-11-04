@@ -1359,13 +1359,15 @@ DROP MAPPING FROM_RT;
 
                 <para><programlisting>
 CREATE USER <replaceable>username</replaceable> PASSWORD '<replaceable>password</replaceable>'
-  [FIRSTNAME '<replaceable>firstname</replaceable>']
-  [MIDDLENAME '<replaceable>middlename</replaceable>']
-  [LASTNAME '<replaceable>lastname</replaceable>']
-  [ACTIVE | INACTIVE]
-  [USING PLUGIN <replaceable>pluginname</replaceable>] 
-  [TAGS (<replaceable>&lt;tag&gt;</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> ...]] )]
-  [GRANT ADMIN ROLE];
+{
+   [FIRSTNAME '<replaceable>firstname</replaceable>']
+   [MIDDLENAME '<replaceable>middlename</replaceable>']
+   [LASTNAME '<replaceable>lastname</replaceable>']
+   [ACTIVE | INACTIVE]
+}  
+[USING PLUGIN <replaceable>pluginname</replaceable>]  
+[GRANT ADMIN ROLE]
+[TAGS (<replaceable>&lt;tag&gt;</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> ...]] )]
 
 <replaceable>&lt;tag&gt;</replaceable> ::= <replaceable>tagname</replaceable> = '<replaceable>string value</replaceable>'                    
                 </programlisting></para>
@@ -1643,10 +1645,10 @@ ALTER {USER <replaceable>username</replaceable> | CURRENT USER}
   [MIDDLENAME '<replaceable>middlename</replaceable>']
   [LASTNAME '<replaceable>lastname</replaceable>']
   [ACTIVE | INACTIVE]
-  [TAGS (<replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> ...] )]
 }
 [USING PLUGIN <replaceable>pluginname</replaceable>] 
-[{GRANT | REVOKE} ADMIN ROLE];
+[{GRANT | REVOKE} ADMIN ROLE]
+[TAGS (<replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> ...] )]
   
 <replaceable>&lt;tag&gt;</replaceable> ::= <replaceable>tagname</replaceable> = '<replaceable>string value</replaceable>'                    
                 </programlisting></para>
@@ -1910,11 +1912,11 @@ CREATE OR ALTER USER <replaceable>username</replaceable>
   [FIRSTNAME '<replaceable>firstname</replaceable>']
   [MIDDLENAME '<replaceable>middlename</replaceable>']
   [LASTNAME '<replaceable>lastname</replaceable>']
-  [ACTIVE | INACTIVE]
-  [TAGS (<replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> ...] )]
+  [ACTIVE | INACTIVE] 
 }
 [USING PLUGIN <replaceable>pluginname</replaceable>] 
-[{GRANT | REVOKE} ADMIN ROLE];
+[{GRANT | REVOKE} ADMIN ROLE]
+[TAGS (<replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> [, <replaceable>&lt;tag&gt;</replaceable> | DROP <replaceable>tagname</replaceable> ...] )]
   
 <replaceable>&lt;tag&gt;</replaceable> ::= <replaceable>tagname</replaceable> = '<replaceable>string value</replaceable>'                    
                 </programlisting></para>
