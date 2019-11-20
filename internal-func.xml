@@ -1023,14 +1023,7 @@ NEW
                 <para>Поскольку 'NOW' всегда возвращает актуальные значения даты и времени при
                     использовании CAST() для приведения типов данных она может использоваться для
                     измерения временных интервалов и скорости выполнения кода в процедурах,
-                    триггерах и блоках кода PSQL. Будьте внимательны при использовании 'NOW', т.к.
-                    использование сокращённого преобразования типов 'NOW' оценивается во время
-                    синтаксического анализа, а затем время её &quot;замораживается&quot;, даже при
-                    многократном выполнении кода. Если вам нужно получать нарастающее значение
-                    времени (т.е. оно должно быть оценено при каждом вызове), используйте полный
-                    синтаксис CAST. Смотри также <link xmlns:xlink="http://www.w3.org/1999/xlink"
-                        linkend="types-cast-shortdatetime">Сокращённое приведение типов даты и
-                        времени</link>.</para>
+                    триггерах и блоках кода PSQL.</para>
             </note>
 
 
@@ -1041,17 +1034,51 @@ NEW
                         <title>Использование переменной 'NOW'</title>
                         <para><programlisting language="sql">
 SELECT CAST('Now' AS DATE) FROM rdb$database;
--- возвратит, например 2014-10-03
+-- возвратит текущую дату, например 2014-10-03
 
 SELECT CAST('now' AS TIME) FROM rdb$database;
--- возвратит, например 14:20:19.6170
+-- возвратит текущее время, например 14:20:19.6170
 
 SELECT CAST('NOW' AS TIMESTAMP) FROM rdb$database;
--- возвратит, например 2014-10-03 14:20:19.6170
+-- возвратит текущую дату и время, например 2014-10-03 14:20:19.6170
+
+-- при использовании короткого "C-Style" литерала
+-- будет возращено дата и время на момент подготовки запроса
+SELECT TIMESTAMP 'NOW' FROM rdb$database; 
+                </programlisting></para>
+                    </example>
+                    <example>
+                        <title>Использование 'NOW' измерения длительности выполнения кода</title>
+                        <para><programlisting language="sql">
+<![CDATA[
+EXECUTE BLOCK
+RETURNS (ms BIGINT)
+AS
+DECLARE VARIABLE t1 TIME;
+DECLARE VARIABLE n BIGINT;
+BEGIN
+  t1 = CAST('now' AS TIME);
+  /* Долгая операция  */
+  SELECT COUNT(*) FROM rdb$types, rdb$types, rdb$types INTO n;
+  /*======*/
+  ms = DATEDIFF(MILLISECOND FROM t1 TO CAST('now' AS TIME));
+  SUSPEND;
+END
+]]> 
                 </programlisting></para>
                     </example>
                 </para>
             </formalpara>
+            <warning>
+                <para>Не рекомендуем использовать сокращённые выражения для литерала 'NOW'.
+                    Использование таких выражений в компилируемом PSQL приводит к тому, что значение
+                    "замораживается" на момент компиляции, и в результате возвращается не актуальное
+                    значение. В Firebird 4.0 сокращённые выражения для таких строковых литералов
+                    будут запрещены, однако вы по прежнему сможете использовать их при приведении
+                    типа оператором CAST. Смотри также <link
+                        xmlns:xlink="http://www.w3.org/1999/xlink" linkend="types-datetime-literals"
+                        >Литералы даты и времени</link>.</para>
+            </warning>
             <formalpara>
                 <title>См. также:</title>
 
@@ -1062,7 +1089,9 @@ SELECT CAST('NOW' AS TIMESTAMP) FROM rdb$database;
                         linkend="internalfunc-contextvar-current_time">CURRENT_TIME</link>, <link
                         linkend="internalfunc-contextvar-today">TODAY</link>, <link
                         linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>, <link
+                        linkend="types-cast-dateliteral">Преобразование строк в дату и время</link>.
+                </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-old">
@@ -1407,24 +1436,36 @@ END
                         <title>Использование переменной 'TODAY'</title>
                         <para><programlisting language="sql">
 SELECT CAST('Today' AS DATE) FROM rdb$database;
- -- возвратит, например 2014-10-03
+-- возвратит дату на сегодня, например 2014-10-03
 SELECT CAST('TODAY' AS TIMESTAMP) FROM rdb$database;
- -- возвратит, например 2014-10-03 00:00:00.0000
-
--- при использовании короткого, "C-Style" преобразования:
-SELECT DATE 'Today' FROM rdb$database;
-SELECT TIMESTAMP 'TODAY' FROM rdb$database;
+-- возвратит дату на сегодня, например 2014-10-03 00:00:00.0000
+ 
+-- при использовании короткого "C-Style" литерала
+-- будет возращена дата подготовки запроса
+SELECT DATE 'TODAY' FROM rdb$database; 
                 </programlisting></para>
                     </example>
                 </para>
             </formalpara>
+            <warning>
+                <para>Не рекомендуем использовать сокращённые выражения для литерала 'TODAY'.
+                    Использование таких выражений в компилируемом PSQL приводит к тому, что значение
+                    "замораживается" на момент компиляции, и в результате возвращается не актуальное
+                    значение. В Firebird 4.0 сокращённые выражения для таких строковых литералов
+                    будут запрещены, однако вы по прежнему сможете использовать их при приведении
+                    типа оператором CAST. Смотри также <link
+                        xmlns:xlink="http://www.w3.org/1999/xlink" linkend="types-datetime-literals"
+                        >Литералы даты и времени</link>.</para>
+            </warning>
             <formalpara>
                 <title>См. также:</title>
 
                 <para>
                     <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>, <link
+                        linkend="types-cast-dateliteral">Преобразование строк в дату и время</link>.
+                </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-tomorrow">
@@ -1464,24 +1505,37 @@ SELECT TIMESTAMP 'TODAY' FROM rdb$database;
                         <title>Использование переменной 'TOMORROW'</title>
                         <para><programlisting language="sql">
 SELECT CAST('Tomorrow' AS DATE) FROM rdb$database;
--- возвратит, например 2014-10-04
+-- будет возращена завтрашняя дата, например 2014-10-04
 
 SELECT CAST('TOMORROW' AS TIMESTAMP) FROM rdb$database;
--- возвратит, например 2014-10-04 00:00:00.0000
+-- будет возращена завтрашняя дата, например 2014-10-04 00:00:00.0000
 
--- при использовании короткого, "C-Style" преобразования:
+-- при использовании короткого "C-Style" литерала
+-- будет возращена дата на 1 день больше даты подготовки запроса
 SELECT DATE 'Tomorrow' FROM rdb$database;
                 </programlisting></para>
                     </example>
                 </para>
             </formalpara>
+            <warning>
+                <para>Не рекомендуем использовать сокращённые выражения для литерала 'TOMORROW'.
+                    Использование таких выражений в компилируемом PSQL приводит к тому, что значение
+                    "замораживается" на момент компиляции, и в результате возвращается не актуальное
+                    значение. В Firebird 4.0 сокращённые выражения для таких строковых литералов
+                    будут запрещены, однако вы по прежнему сможете использовать их при приведении
+                    типа оператором CAST. Смотри также <link
+                        xmlns:xlink="http://www.w3.org/1999/xlink" linkend="types-datetime-literals"
+                        >Литералы даты и времени</link>.</para>
+            </warning>
             <formalpara>
                 <title>См. также:</title>
 
                 <para>
                     <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-today">TODAY</link>, <link
-                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>. </para>
+                        linkend="internalfunc-contextvar-yesterday">YESTERDAY</link>, <link
+                        linkend="types-cast-dateliteral">Преобразование строк в дату и время</link>.
+                </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-updating">
@@ -1578,23 +1632,35 @@ END
                         <title>Использование переменной 'YERSTERDAY'</title>
                         <para><programlisting language="sql">
 SELECT CAST('Yesterday' AS DATE) FROM rdb$database;
---возвратит, например 2014-10-04
+-- будет возращена вчерашняя дата, например 2014-10-04
 
--- при использовании короткого, "C-Style" преобразования
+-- использовании короткого "C-Style" литерала
+-- будет возращена дата 1 день меньше даты подготовки запроса
 SELECT DATE 'Yesterday' FROM rdb$database;
 SELECT TIMESTAMP 'YESTERDAY' FROM rdb$database;
                 </programlisting></para>
                     </example>
                 </para>
             </formalpara>
-
+            <warning>
+                <para>Не рекомендуем использовать сокращённые выражения для литерала 'YESTERDAY'.
+                    Использование таких выражений в компилируемом PSQL приводит к тому, что значение
+                    "замораживается" на момент компиляции, и в результате возвращается не актуальное
+                    значение. В Firebird 4.0 сокращённые выражения для таких строковых литералов
+                    будут запрещены, однако вы по прежнему сможете использовать их при приведении
+                    типа оператором CAST. Смотри также <link
+                        xmlns:xlink="http://www.w3.org/1999/xlink" linkend="types-datetime-literals"
+                        >Литералы даты и времени</link>.</para>
+            </warning>
             <formalpara>
                 <title>См. также:</title>
 
                 <para>
                     <link linkend="internalfunc-contextvar-current_date">CURRENT_DATE</link>, <link
                         linkend="internalfunc-contextvar-today">TODAY</link>, <link
-                        linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>. </para>
+                        linkend="internalfunc-contextvar-tomorrow">TOMORROW</link>, <link
+                        linkend="types-cast-dateliteral">Преобразование строк в дату и время</link>.
+                </para>
             </formalpara>
         </section>
         <section xml:id="internalfunc-contextvar-user">

@@ -402,13 +402,13 @@ FLOAT(<replaceable>p</replaceable>)
             <indexterm><primary>DOUBLE PRECISION</primary></indexterm>
             <para>При хранении данных, предполагается приблизительная точность 15 цифр.</para>
         </section>
-        
+
         <section xml:id="types-float-long_float">
             <info>
                 <title>LONG FLOAT</title>
             </info>
             <indexterm><primary>LONG FLOAT</primary></indexterm>
-            
+
             <formalpara>
                 <title>Синтаксис:</title>
                 <para>
@@ -417,16 +417,16 @@ LONG FLOAT[(<replaceable>&lt;precision&gt;</replaceable>)]
 </literallayout>
                 </para>
             </formalpara>
-            
+
             <para>Тип LONG FLOAT является синонимом типа DOUBLE PRECISION. У этого типа может быть
                 указана точность в десятичных числах. Указанная точность не влияет на способ
                 хранения — число всегда храниться как 64-битное двойной точности.</para>
-            
+
             <note>
                 <para>В Firebird 4.0 точность указывается в двоичных числах для согласования со
                     стандартом относительно типа FLOAT.</para>
             </note>
-            
+
             <warning>
                 <para> Эти нестандартные имена типов устарели и могут быть удалены в будущей
                     версии.</para>
@@ -709,6 +709,221 @@ EXTRACT (SECOND FROM DATE_FIELD)
             </info>
             <indexterm><primary>TIMESTAMP</primary></indexterm>
             <para>Этот тип данных хранит дату вместе со временем.</para>
+        </section>
+        <section xml:id="types-datetime-literals">
+
+            <title>Литералы даты и времени</title>
+
+            <para>Для записи литералов даты и времени в Firebird используются сокращенные
+                &quot;C-style&quot; выражения. Строковое представление даты и времени должно быть в
+                одном из разрешённых форматов.</para>
+            <formalpara>
+                <title>Синтаксис:</title>
+
+                <para>
+                    <literallayout class="monospaced">  
+<replaceable>&lt;date_literal&gt;</replaceable> ::= DATE {<replaceable>&lt;date&gt;</replaceable>  | {'NOW' | 'TODAY' | 'TOMORROW' | 'YESTERDAY'} }                    
+                        
+<replaceable>&lt;time_literal&gt;</replaceable> ::= TIME {<replaceable>&lt;time></replaceable> | 'NOW'} 
+                        
+<replaceable>&lt;timestamp_literal&gt;</replaceable> ::= TIMESTAMP {<replaceable>&lt;timestamp></replaceable> | {'NOW' | 'TODAY' | 'TOMORROW' | 'YESTERDAY'} }                        
+
+<replaceable>&lt;date&gt;</replaceable> ::= 
+  [<replaceable>YYYY</replaceable><replaceable>&lt;p&gt;</replaceable>]<replaceable>MM</replaceable><replaceable>&lt;p&gt;</replaceable><replaceable>DD</replaceable> |
+  <replaceable>MM</replaceable><replaceable>&lt;p&gt;</replaceable><replaceable>DD</replaceable>[<replaceable>&lt;p&gt;</replaceable><replaceable>YYYY</replaceable>] |
+  <replaceable>DD</replaceable><replaceable>&lt;p&gt;</replaceable><replaceable>MM</replaceable>[<replaceable>&lt;p&gt;</replaceable><replaceable>YYYY</replaceable>] |
+  <replaceable>MM</replaceable><replaceable>&lt;p&gt;</replaceable><replaceable>DD</replaceable>[<replaceable>&lt;p&gt;</replaceable><replaceable>YY</replaceable>] |
+  <replaceable>DD</replaceable><replaceable>&lt;p&gt;</replaceable><replaceable>MM</replaceable>[<replaceable>&lt;p&gt;</replaceable><replaceable>YY</replaceable>] 
+
+
+<replaceable>&lt;time&gt;</replaceable> := <replaceable>HH</replaceable>[:<replaceable>mm</replaceable>[:<replaceable>SS</replaceable>[.<replaceable>NNNN</replaceable>]]]
+
+<replaceable>&lt;timestamp&gt;</replaceable> ::= <replaceable>&lt;date></replaceable> <replaceable>&lt;time&gt;</replaceable>
+                              
+<replaceable>&lt;p&gt;</replaceable> ::= <replaceable>whitespace</replaceable> | . | : | , | - | /    
+                        
+                        
+                   </literallayout>
+                </para>
+            </formalpara>
+            <para>
+                <table xml:id="types-datetime-literals-sesc" frame="all">
+                    <?dbfo keep-together='auto'?>
+                    <title>Описание формата даты и времени</title>
+                    <tgroup cols="2">
+                        <colspec colname="colArg" colnum="1" colwidth="2*" align="left"/>
+                        <colspec colname="colDesc" colnum="2" colwidth="3*" align="left"/>
+                        <thead>
+                            <row valign="middle">
+                                <entry align="center">Аргумент</entry>
+                                <entry align="center">Описание</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row valign="middle">
+                                <entry><replaceable>datetime</replaceable></entry>
+                                <entry><para>Строковое представление даты-времени.</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>date</replaceable></entry>
+                                <entry><para>Строковое представление даты.</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>time</replaceable></entry>
+                                <entry><para>Строковое представление времени.</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>YYYY</replaceable></entry>
+                                <entry><para>Год из четырёх цифр.</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>YY</replaceable></entry>
+                                <entry><para>Последние две цифры года (00-99).</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>MM</replaceable></entry>
+                                <entry><para>Месяц. Может содержать 1 или 2 цифры (1-12 или 01-12).
+                                        В качестве месяца допустимо также указывать трёхбуквенное
+                                        сокращение или полное наименование месяца на английском
+                                        языке, регистр не имеет значение.</para>
+                                </entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>DD</replaceable></entry>
+                                <entry><para>День. Может содержать 1 или 2 цифры (1-31 или
+                                        01-31).</para>
+                                </entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>HH</replaceable></entry>
+                                <entry><para>Час. Может содержать 1 или 2 цифры (0-23 или
+                                        00-23).</para>
+                                </entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>mm</replaceable></entry>
+                                <entry><para>Минуты. Может содержать 1 или 2 цифры (0-59 или
+                                        00-59).</para>
+                                </entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>SS</replaceable></entry>
+                                <entry><para>Секунды. Может содержать 1 или 2 цифры (0-59 или
+                                        00-59).</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>NNNN</replaceable></entry>
+                                <entry><para>Десятитысячные доли секунды. Может содержать от 1 до 4
+                                        цифр (0-9999).</para></entry>
+                            </row>
+                            <row valign="middle">
+                                <entry><replaceable>p</replaceable></entry>
+                                <entry><para>Разделитель, любой из разрешённых символов, лидирующие
+                                        и завершающие пробелы игнорируются.</para></entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            <para>Правила: <itemizedlist spacing="compact">
+                    <listitem>
+                        <para>В формате Год-Месяц-День, год обязательно должен содержать 4
+                            цифры;</para>
+                    </listitem>
+                    <listitem>
+                        <para>Для дат в формате с завершающим годом, если в качестве разделителя дат
+                            используется точка <quote>.</quote>, то дата интерпретируется в форме
+                            День-Месяц-Год, для остальных разделителей она интерпретируется в форме
+                            Месяц-День-Год;</para>
+                    </listitem>
+                    <listitem>
+                        <para>Если год не указан, то в качестве года берётся текущий год;</para>
+                    </listitem>
+                    <listitem>
+                        <para>Если указаны только две цифры года, то для получения столетия Firebird
+                            использует алгоритм скользящего окна. Задача заключается в интерпретации
+                            двухсимвольного значения года как ближайшего к текущему году в интервале
+                            предшествующих и последующих 50 лет;</para>
+                    </listitem>
+                    <listitem>
+                        <para>Если не указан один из элементов времени, то оно принимается равным
+                            0.</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <tip>
+                <para>Настоятельно рекомендуем в литералах дат использовать только формы с полным
+                    указанием года в виде 4 цифр во избежание путаницы. </para>
+            </tip>
+            <formalpara>
+                <title>Примеры:</title>
+
+                <para>
+                    <programlisting language="sql"> 
+SELECT
+  date '04.12.2014' AS d1, -- DD.MM.YYYY
+  date '12-04-2014' AS d2, -- MM-DD-YYYY
+  date '12/04/2014' AS d3, -- MM/DD/YYYY
+  date '04.12.14'  AS d4,   -- DD.MM.YY
+  -- DD.MM в качестве года берётся текущий
+  date '04.12' AS d5,
+  -- MM/DD в качестве года берётся текущий      
+  date '12/4' AS d6,
+  date '2014/12/04'  AS d7, -- YYYY/MM/DD
+  date '2014.12.04'  AS d8, -- YYYY.MM.DD
+  date '2014-12-04'  AS d9, -- YYYY-MM-DD
+  -- дата на момент подготовки запроса
+  date 'NOW' AS d10,
+  -- дата на момент подготовки запроса
+  date 'TODAY' AS d11,
+  -- дата на 1 день меньше даты подготовки запроса
+  date 'YESTERDAY' AS d12,
+  -- дата на 1 день больше даты подготовки запроса
+  date 'TOMORROW' AS d13,
+  time '11:37' AS t1, -- HH:mm
+  time '11:37:12' AS t2, -- HH:mm:ss
+  time '11:31:12.1234' AS t3, -- HH:mm:ss.nnnn
+  -- время на момент подготовки запроса
+  time 'NOW' AS t4,
+  -- DD.MM.YYYY HH:mm
+  timestamp '04.12.2014 11:37' AS dt1,
+  -- MM/DD/YYYY HH:mm:ss
+  timestamp '12/04/2014 11:37:12' AS dt2,
+  -- DD.MM.YYYY HH:mm:ss.nnnn 
+  timestamp '04.12.2014 11:31:12.1234' AS dt3,
+  -- дата и время на момент подготовки запроса
+  timestamp 'NOW' AS dt4,
+  -- дата на момент подготовки запроса, время 00:00:00
+  timestamp 'TODAY' AS dt5,
+  -- дата на 1 день меньше даты подготовки запроса, время 00:00:00
+  timestamp 'YESTERDAY' AS dt6,
+  -- дата на 1 день больше даты подготовки запроса, время 00:00:00
+  timestamp 'TOMORROW' AS dt7
+FROM rdb$database             
+                   </programlisting>
+                </para>
+            </formalpara>
+            <note>
+                <para>Обратите внимание, что эти сокращённые выражения вычисляются сразу же во время
+                    синтаксического анализа (подготовки запроса или компиляции процедуры, функции
+                    или триггера).</para>
+            </note>
+            <warning>
+                <para>Не рекомендуем использовать сокращённые выражения для специальных строковых
+                    литералов 'NOW', 'TODAY', 'TOMORROW', 'YESTERDAY'. Использование таких выражений
+                    в компилируемом PSQL приводит к тому, что значение "замораживается" на момент
+                    компиляции, и в результате возвращаются не актуальные значения. В Firebird 4.0
+                    сокращённые выражения для таких строковых литералов будут запрещены, однако вы
+                    по прежнему сможете использовать их при приведении типа оператором CAST.</para>
+            </warning>
+            <formalpara>
+                <title>См. также:</title>
+
+                <para>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                        linkend="types-cast-dateliteral">Преобразование строк в дату и время</link>.
+                </para>
+            </formalpara>
         </section>
         <section xml:id="types-datetime-operation">
             <info>
@@ -1828,7 +2043,7 @@ FROM RDB$DATABASE;
                 </important>
             </section>
             <section xml:id="types-cast-dateliteral">
-                <title>Преобразование литералов дат и времени</title>
+                <title>Преобразование строк в дату и время</title>
                 <para>Для преобразования строковых типов данных в типы DATE, TIME или TIMESTAMP
                     необходимо чтобы строковый аргумент был либо одним из предопределённых литералов
                     даты и времени, либо строковое представление даты в одном из разрешённых
@@ -2063,62 +2278,10 @@ FROM rdb$database
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func-cast-cast">CAST</link>. </para>
-                </formalpara>
-            </section>
-            <section xml:id="types-cast-shortdatetime">
-                <info>
-                    <title>Сокращённое приведение типов даты и времени</title>
-                </info>
-
-                <para>При преобразовании строки в типы DATE, TIME или TIMESTAMP, Firebird позволяет
-                    использовать сокращённое &quot;C-style&quot; приведение типов. </para>
-                <formalpara>
-                    <title>Синтаксис:</title>
-
-                    <para>
-                        <programlisting>  
-<replaceable>datatype</replaceable> '<replaceable>date/time string</replaceable>'             
-                   </programlisting>
+                        <link linkend="internalfunc-func-cast-cast">CAST</link>, <link
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            linkend="types-datetime-literals">Литералы даты и времени</link>.
                     </para>
-                </formalpara>
-                <formalpara>
-                    <title>Примеры:</title>
-
-                    <para>
-                        <programlisting language="sql"> 
--- 1                            
-  UPDATE PEOPLE
-  SET AGECAT = 'Old'
-  WHERE BIRTHDATE &lt; DATE '1-Jan-1943';
--- 2
-  INSERT INTO APPOINTMENTS 
-    (EMPLOYEE_ID, CLIENT_ID, APP_DATE, APP_TIME)
-  VALUES (973, 8804, DATE 'today' + 2, TIME '16:00');
--- 3
-  NEW.LASTMOD = TIMESTAMP 'now';            
-                   </programlisting>
-                    </para>
-                </formalpara>
-                <note>
-                    <para>Обратите внимание, что эти сокращённые выражения вычисляются сразу же во
-                        время синтаксического анализа, то есть, как будто оператор уже подготовлен к
-                        выполнению. Таким образом, даже если запрос выполняется несколько раз,
-                        значение, например, для TIMESTAMP 'NOW' не изменится, независимо от того,
-                        сколько времени проходит. Если вам нужно получать нарастающее значение
-                        времени (т.е. оно должно быть оценено при каждом вызове), используйте полный
-                        синтаксис CAST.
-                        <programlisting language="sql">  
-NEW.CHANGE_DATE = CAST('now' AS TIMESTAMP);          
-               </programlisting>
-                    </para>
-                </note>
-                <formalpara>
-                    <title>См. также:</title>
-
-                    <para>
-                        <link linkend="types-cast-explicit">Явное преобразование типов
-                        данных</link>. </para>
                 </formalpara>
             </section>
         </section>
