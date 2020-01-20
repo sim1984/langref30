@@ -282,7 +282,9 @@ WHERE MON$ATTACHMENT_ID &lt;&gt; CURRENT_CONNECTION
                     <itemizedlist spacing="compact">
                         <listitem>
                             <para>Вся текущая активность в удаляемом соединении немедленно
-                                прекращается, и все активные транзакции откатываются;</para>
+                                прекращается, и все активные транзакции откатываются (триггеры на
+                                события ON DISCONNECT и ON TRANSACTION ROLLBACK не
+                                вызываются);</para>
                         </listitem>
                         <listitem>
                             <para>Закрытое соединение вернёт приложению ошибку с кодом
@@ -898,9 +900,9 @@ WHERE VAR.MON$ATTACHMENT_ID = CURRENT_CONNECTION
         </para>
         <note>
             <para> Счётчики, связанные с записями уровня базы данных <code>MON$DATABASE</code>
-                (<code>MON$STAT_GROUP = 0</code>), отображают выделение памяти для всех соединений. В
-                архитектурах Classic и SuperClassic нулевые значения счётчиков обозначают, что в
-                этих архитектурах нет общего кэша. </para>
+                    (<code>MON$STAT_GROUP = 0</code>), отображают выделение памяти для всех
+                соединений. В архитектурах Classic и SuperClassic нулевые значения счётчиков
+                обозначают, что в этих архитектурах нет общего кэша. </para>
         </note>
 
         <formalpara>
@@ -1169,8 +1171,8 @@ WHERE ATT.MON$ATTACHMENT_ID &lt;&gt; CURRENT_CONNECTION
             <title>Использование MON$STATEMENTS для отмены запросов</title>
 
             <para>Таблицы мониторинга доступны только для чтения. Однако в сервер встроен механизм
-                для удаления (и только удаления) записей в таблице <code>MON$STATEMENTS</code>, что позволяет
-                завершить активный запрос.</para>
+                для удаления (и только удаления) записей в таблице <code>MON$STATEMENTS</code>, что
+                позволяет завершить активный запрос.</para>
             <note>
                 <para>
                     <itemizedlist spacing="compact">
