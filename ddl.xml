@@ -3307,10 +3307,10 @@ ON UPDATE CASCADE ON DELETE SET NULL
                             проверки, которое может уже быть определено в домене.</para>
                     </important>
                     <para>На уровне столбца или таблицы выражение в предложении
-                        <database>CHECK</database> ссылается на входящее значения с помощью с
+                            <database>CHECK</database> ссылается на входящее значения с помощью с
                         помощью идентификаторов столбцов, в отличие от доменов, где в ограничении
-                        <database>CHECK</database> для этих целей используется ключевое слово
-                        <database>VALUE</database>. </para>
+                            <database>CHECK</database> для этих целей используется ключевое слово
+                            <database>VALUE</database>. </para>
                     <formalpara>
                         <title>Примеры:</title>
                         <para>
@@ -6591,8 +6591,8 @@ CREATE TRIGGER <replaceable>trigname</replaceable>
                     <para>Тело триггера может содержать объявления локальных переменных и курсоров.
                         Подробности вы можете посмотреть в главе <quote>Процедурный язык
                             PSQL</quote> в разделах <link linkend="psql-statements-declare-var"
-                            >DECLARE VARIABLE</link> и <link linkend="psql-statements-declare-cursor"
-                            >DECLARE CURSOR</link>. </para>
+                            >DECLARE VARIABLE</link> и <link
+                            linkend="psql-statements-declare-cursor">DECLARE CURSOR</link>. </para>
 
                     <para>После секции объявления следует основной блок BEGIN ... END, в который
                         заключается PSQL код триггера. В этом блоке могут содержаться DML и PSQL
@@ -11116,181 +11116,12 @@ END
                         <title>См. также:</title>
 
                         <para>
-                            <link linkend="ddl-package-body-alter">ALTER PACKAGE BODY</link>, <link
-                                linkend="ddl-package-body-drop">DROP PACKAGE BODY</link>, <link
+                            <link linkend="ddl-package-body-drop">DROP PACKAGE BODY</link>, <link
                                 linkend="ddl-package-create">CREATE PACKAGE</link>. </para>
                     </formalpara>
                 </section>
             </section>
-            <section xml:id="ddl-package-body-alter">
-                <info>
-                    <title>ALTER PACKAGE BODY</title>
-                    <keywordset>
-                        <keyword>ALTER PACKAGE BODY</keyword>
-                    </keywordset>
-                </info>
-                <indexterm><primary>ALTER PACKAGE BODY</primary></indexterm>
-                <formalpara>
-                    <title>Назначение:</title>
 
-                    <para>Изменение тела пакета.</para>
-                </formalpara>
-
-                <formalpara>
-                    <title>Доступно в:</title>
-
-                    <para>DSQL.</para>
-                </formalpara>
-                <formalpara>
-                    <title>Синтаксис:</title>
-                    <para>
-                        <programlisting>
-ALTER PACKAGE BODY <replaceable>package_name</replaceable>  
-AS
-BEGIN
-  [<replaceable>&lt;package_item&gt;</replaceable> ...]
-  [<replaceable>&lt;package_body_item&gt;</replaceable> ...]                                                        
-END
-
-<replaceable>&lt;package_item&gt;</replaceable> ::=
-    <replaceable>&lt;function_decl&gt;</replaceable>; 
-  | <replaceable>&lt;procedure_decl&gt;</replaceable>;
-                            
-<replaceable>&lt;function_decl&gt;</replaceable> ::=
-  FUNCTION <replaceable>func_name</replaceable> [(<replaceable>&lt;in_params&gt;</replaceable>)] 
-    RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC]   
-                            
-<replaceable>&lt;procedure_decl&gt;</replaceable> ::=
-  PROCEDURE <replaceable>proc_name</replaceable> [(<replaceable>&lt;in_params&gt;</replaceable>)] [RETURNS (<replaceable>&lt;out_params&gt;</replaceable>)]     
-
-<replaceable>&lt;package_body_item&gt;</replaceable> ::=
-    <replaceable>&lt;function_impl&gt;</replaceable> 
-  | <replaceable>&lt;procedure_impl&gt;</replaceable>
-
-<replaceable>&lt;function_impl&gt;</replaceable> ::=
-  FUNCTION <replaceable>func_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] 
-  RETURNS <replaceable>&lt;type&gt;</replaceable> [COLLATE <replaceable>collation</replaceable>] [DETERMINISTIC] 
-  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}  
-      
-<replaceable>&lt;procedure_impl&gt;</replaceable> ::=
-  PROCEDURE <replaceable>proc_name</replaceable> [(<replaceable>&lt;in_impl_params&gt;</replaceable>)] [RETURNS (<replaceable>&lt;out_params&gt;</replaceable>)]       
-  {<replaceable>&lt;psql-body&gt;</replaceable> | <replaceable>&lt;external-body&gt;</replaceable>}                             
-
-<replaceable>&lt;psql-body&gt;</replaceable> ::=
-  AS       
-    [<replaceable>&lt;declarations&gt;</replaceable>]       
-  BEGIN       
-    [<replaceable>&lt;PSQL_statements&gt;</replaceable>]       
-  END 
-
-<replaceable>&lt;external-body&gt;</replaceable> ::= 
-  EXTERNAL NAME '<replaceable>&lt;extname&gt;</replaceable>' ENGINE <replaceable>&lt;engine&gt;</replaceable> 
-  [AS <replaceable>&lt;extbody&gt;</replaceable>]                             
-                        </programlisting>
-                    </para>
-                </formalpara>
-                <formalpara>
-                    <title>Подробнее см.</title>
-
-                    <para>
-                        <link linkend="ddl-package-body-create">CREATE PACKAGE BODY</link>. </para>
-                </formalpara>
-
-                <para>Оператор ALTER PACKAGE BODY изменяет тело пакета. Позволяется изменять
-                    количество и состав процедур и функций тела пакета.</para>
-                <para>Все процедуры и функции, объявленные в заголовке пакета, должны быть
-                    реализованы в теле пакета. Кроме того, должны быть реализованы и все процедуры и
-                    функции, объявленные в теле пакета.</para>
-                <para>Имена процедур и функций, объявленные в теле пакета, должны быть уникальны
-                    среди имён процедур и функций, объявленных в заголовке и теле пакета.</para>
-                <note>
-                    <para>Желательно чтобы имена хранимых процедур и функций пакета не пересекались
-                        с именами хранимых процедур и функций из глобального пространства имен, хотя
-                        это и допустимо. Дело в том, что в настоящее время вы не сможете вызвать
-                        функцию/процедуру из глобального пространства имён внутри пакета, если в
-                        пакете объявлена одноименная функция/процедура. В этом случае всегда будет
-                        вызвана процедура/функция пакета. </para>
-                </note>
-                <formalpara>
-                    <title>Правила:</title>
-                    <para>
-                        <itemizedlist>
-                            <listitem>
-                                <para>В теле пакеты должны быть реализованы все подпрограммы, стой
-                                    же сигнатурой, что и объявленные в заголовке и в начале тела
-                                    пакета.</para>
-                            </listitem>
-                            <listitem>
-                                <para>Значения по умолчанию для параметров процедур не могут быть
-                                    переопределены (которые указываются в
-                                        <replaceable>&lt;package_item&gt;</replaceable>). Это
-                                    означает, что они могут быть в
-                                        <replaceable>&lt;package_body_item&gt;</replaceable> только
-                                    для частных процедур, которые не были объявлены.</para>
-                            </listitem>
-                        </itemizedlist>
-                    </para>
-                </formalpara>
-                <section xml:id="ddl-package-body-alter-who">
-                    <title>Кто может изменить тело пакета?</title>
-
-                    <para>Выполнить оператор <database>ALTER PACKAGE BODY</database> могут:
-                            <itemizedlist spacing="compact">
-                            <listitem>
-                                <para><link linkend="security-administrators"
-                                    >Администраторы</link></para>
-                            </listitem>
-                            <listitem>
-                                <para>Владелец пакета; </para>
-                            </listitem>
-                            <listitem>
-                                <para>Пользователи с привилегией <database>ALTER ANY
-                                        PACKAGE</database>. </para>
-                            </listitem>
-                        </itemizedlist>
-                    </para>
-
-                </section>
-                <section xml:id="ddl-package-body-alter-examples">
-                    <title>Примеры</title>
-                    <example>
-                        <title>Изменение тела пакета</title>
-                        <para><programlisting language="sql">
-ALTER PACKAGE BODY APP_VAR
-AS
-BEGIN
-  -- Возвращает дату начала периода
-  FUNCTION GET_DATEBEGIN() RETURNS DATE DETERMINISTIC
-  AS
-  BEGIN
-    RETURN RDB$GET_CONTEXT('USER_SESSION', 'DATEBEGIN');
-  END
-  -- Возвращает дату окончания периода
-  FUNCTION GET_DATEEND() RETURNS DATE DETERMINISTIC
-  AS
-  BEGIN
-    RETURN RDB$GET_CONTEXT('USER_SESSION', 'DATEEND');
-  END
-  -- Устанавливает диапазон дат рабочего периода
-  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE)
-  AS
-  BEGIN
-    RDB$SET_CONTEXT('USER_SESSION', 'DATEBEGIN', ADATEBEGIN);
-    RDB$SET_CONTEXT('USER_SESSION', 'DATEEND', ADATEEND);
-  END
-END    
-                </programlisting></para>
-                    </example>
-                    <formalpara>
-                        <title>См. также:</title>
-
-                        <para>
-                            <link linkend="ddl-package-body-create">CREATE PACKAGE BODY</link>,
-                                <link linkend="ddl-package-body-drop">DROP PACKAGE BODY</link>,
-                                <link linkend="ddl-package-alter">ALTER PACKAGE</link>. </para>
-                    </formalpara>
-                </section>
-            </section>
             <section xml:id="ddl-package-body-drop">
                 <info>
                     <title>DROP PACKAGE BODY</title>
@@ -11375,7 +11206,6 @@ DROP PACKAGE BODY APP_VAR;
 
                         <para>
                             <link linkend="ddl-package-body-create">CREATE PACKAGE BODY</link>,
-                                <link linkend="ddl-package-body-alter">ALTER PACKAGE BODY</link>,
                                 <link linkend="ddl-package-drop">DROP PACKAGE</link>. </para>
                     </formalpara>
                 </section>
@@ -11494,8 +11324,8 @@ END
 
                         <para>
                             <link linkend="ddl-package-body-create">CREATE PACKAGE BODY</link>,
-                                <link linkend="ddl-package-body-drop">DROP PACKAGE BODY</link>,
-                                <link linkend="ddl-package-alter">ALTER PACKAGE</link>. </para>
+                                <link linkend="ddl-package-body-drop">DROP PACKAGE BODY</link>.
+                        </para>
                     </formalpara>
                 </section>
             </section>
