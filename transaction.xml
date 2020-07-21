@@ -269,7 +269,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                             WAIT).</para>
                         <para>Этот режим даёт несколько отличные формы поведения в зависимости от
                             уровня изоляции транзакций.</para>
-                        <para>В Firebird API режиму <code>WAIT</code> соответсвует константа
+                        <para>В Firebird API режиму <code>WAIT</code> соответствует константа
                                 <code>isc_tpb_wait</code>.</para>
                     </section>
                     <section xml:id="transaction-set_transaction-no_wait_mode">
@@ -281,7 +281,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                         <para>Если установлен режим разрешения блокировок <code>NO WAIT</code>, то
                             при появлении конфликта блокировки данная транзакция немедленно вызовет
                             исключение базы данных.</para>
-                        <para>В Firebird API режиму <code>NO WAIT</code> соответсвует константа
+                        <para>В Firebird API режиму <code>NO WAIT</code> соответствует константа
                                 <code>isc_tpb_nowait</code>.</para>
                     </section>
                 </section>
@@ -341,7 +341,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                                     <code>SNAPSHOT</code>. </para>
                         </note>
                         <para>В Firebird API режиму изолированности <code>SNAPSHOT</code>
-                            соответсвует константа <code>isc_tpb_concurrency</code>.</para>
+                            соответствует константа <code>isc_tpb_concurrency</code>.</para>
                     </section>
                     <section xml:id="transaction-isolation_level-snapshot_table_stability">
                         <title>Уровень изолированности SNAPSHOT TABLE STABILITY</title>
@@ -367,7 +367,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                             то запуск транзакции с таким уровнем изоляции приведёт к ошибке базы
                             данных. </para>
                         <para>В Firebird API режиму изолированности <code>SNAPSHOT TABLE
-                                STABILITY</code> соответсвует константа
+                                STABILITY</code> соответствует константа
                                 <code>isc_tpb_consistency</code>.</para>
                     </section>
                     <section xml:id="transaction-isolation_level-read_commited">
@@ -387,7 +387,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                             рамках активной транзакции <code>READ COMMITTED</code> без её
                             перезапуска.</para>
                         <para>В Firebird API режиму изолированности <code>READ COMMITTED</code>
-                            соответсвует константа <code>isc_tpb_read_committed</code>.</para>
+                            соответствует константа <code>isc_tpb_read_committed</code>.</para>
 
                         <section xml:id="transaction-isolation_level-read_commited-record_version">
                             <title>RECORD_VERSION</title>
@@ -418,7 +418,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                                             идентификатор текущей транзакции, то будет выдана ошибка
                                             конфликта блокировок.</para>
                                         <para>В Firebird API для способа разрешения конфликтов
-                                                <code>NO RECORD_VERSION</code> соответсвует
+                                                <code>NO RECORD_VERSION</code> соответствует
                                             константа <code>isc_tpb_no_rec_version</code>.</para>
                                     </listitem>
                                     <listitem>
@@ -430,7 +430,7 @@ WAIT ISOLATION LEVEL SNAPSHOT;
                                                 <code>NO WAIT</code>) никак не влияет на поведение
                                             транзакции при её старте.</para>
                                         <para>В Firebird API для способа разрешения конфликтов
-                                                <code>RECORD_VERSION</code> соответсвует константа
+                                                <code>RECORD_VERSION</code> соответствует константа
                                                 <code>isc_tpb_rec_version</code>.</para>
                                     </listitem>
                                 </itemizedlist></para>
