@@ -572,7 +572,7 @@ SELECT rdb$character_set_name FROM rdb$database
                     <title>См. также:</title>
 
                     <para>
-                        <link linkend="internalfunc-func">Скалярные функции</link>, <link
+                        <link linkend="internalfunc">Скалярные функции</link>, <link
                             linkend="internalfunc-agg">Агрегатные функции</link>, <link
                             linkend="internalfunc-window">Оконные (аналитические) функции</link>,
                             <link linkend="internalfunc-contextvar">Контекстные переменные</link>,

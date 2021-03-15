@@ -10,8 +10,8 @@
     xml:lang="ru">
     <info>
         <title>Руководство по языку SQL СУБД Firebird 3.0</title>
-        <subtitle>Firebird 3.0.7</subtitle>
-        <edition>10 ноября 2020 — v.0078-1</edition>
+        <subtitle>Firebird 3.0.8</subtitle>
+        <edition>15 марта 2021 — v.0079-1</edition>
 
         <authorgroup>
             <author>
@@ -41,7 +41,7 @@
             <publishername>Firebird Project</publishername>
         </publisher>
         <copyright>
-            <year>2019</year>
+            <year>2021</year>
             <holder>Firebird Project и все авторы, в соответствии с лицензией <link
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xlink:href="http://www.firebirdsql.org/manual/pdl.html">Public Documentation
@@ -61,6 +61,9 @@
     <xi:include href="dml.xml" xpointer="element(/1)"/>
     <xi:include href="psql.xml" xpointer="element(/1)"/>
     <xi:include href="internal-func.xml" xpointer="element(/1)"/>
+    <xi:include href="agg-func.xml" xpointer="element(/1)"/>
+    <xi:include href="window-func.xml" xpointer="element(/1)"/>
+    <xi:include href="context-var.xml" xpointer="element(/1)"/>
     <xi:include href="transaction.xml" xpointer="element(/1)"/>
     <xi:include href="security.xml" xpointer="element(/1)"/>
     <xi:include href="supplement.xml" xpointer="element(/1)"/>
