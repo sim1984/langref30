@@ -1770,7 +1770,7 @@ WHERE CHANGE_DATE CONTAINING 84;
                         <para>Если число сопровождается запятой, то для соответствия необходимо
                             повторение элемента как минимум это число
                             раз:<programlisting language="sql">
-'Limone' SIMILAR TO 'Li{2,}mone' –- FALSE
+'Limone' SIMILAR TO 'Li{2,}mone' -- FALSE
 'Limone' SIMILAR TO 'Li{1,}mone' -- TRUE
 'Limone' SIMILAR TOto 'Li[nezom]{2,}' -- TRUE                        
                             </programlisting></para>
@@ -1796,7 +1796,7 @@ WHERE CHANGE_DATE CONTAINING 84;
                             условий:<programlisting language="sql">
 'Nektarin' SIMILAR TO 'Nek|tarin' -- FALSE
 'Nektarin' SIMILAR TO 'Nektarin|Persika' -- TRUE
-'Nektarin' SIMILAR TO 'M_+|N_+|P_+' – TRUE                                
+'Nektarin' SIMILAR TO 'M_+|N_+|P_+' -- TRUE                                
                         </programlisting></para>
                     </simplesect>
                     <simplesect>
@@ -1809,7 +1809,7 @@ WHERE CHANGE_DATE CONTAINING 84;
 'Orange' SIMILAR TO 'O(ra|ri|ro)nge' -- TRUE
 'Orange' SIMILAR TO 'O(r[a-e])+nge' -- TRUE
 'Orange' SIMILAR TO 'O(ra){2,4}nge' -- FALSE
-'Orange' SIMILAR TO 'O(r(an|in)g|rong)?e' – TRUE                               
+'Orange' SIMILAR TO 'O(r(an|in)g|rong)?e' -- TRUE                               
                         </programlisting></para>
                     </simplesect>
                     <simplesect>
