@@ -1005,19 +1005,23 @@ FETCH FIRST 10 ROWS ONLY
                         <row>
                             <entry>MON$RECORD_BACKOUTS </entry>
                             <entry>BIGINT </entry>
-                            <entry>Количество возвращённых в базу данных записей (backed out
-                                records). </entry>
+                            <entry>Количество удалений версий записей созданных при rollback (backed
+                                out records).</entry>
                         </row>
                         <row>
                             <entry>MON$RECORD_PURGES </entry>
                             <entry>BIGINT </entry>
-                            <entry>Количество удалённых ненужных записей (purged records). </entry>
+                            <entry>Количество удалений старых версий записей (purged
+                                records).</entry>
                         </row>
                         <row>
                             <entry>MON$RECORD_EXPUNGES </entry>
                             <entry>BIGINT </entry>
-                            <entry>Количество вычищенных средствами сборки мусора записей (expunged
-                                records). </entry>
+                            <entry>
+                                <para>Количество удалений всей цепочки версий записи, если самая
+                                    последняя версия удалена, и не нужна другим транзакциям
+                                    (expunged records).</para>
+                            </entry>
                         </row>
                         <row>
                             <entry>MON$RECORD_LOCKS </entry>
