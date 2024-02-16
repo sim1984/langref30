@@ -942,7 +942,7 @@ ALTER DATABASE SET DEFAULT CHARACTER SET WIN1251;
 
                     <para>
                         <programlisting language="sql">  
-ALTER DATABASE SET LINGER 30;         
+ALTER DATABASE SET LINGER TO 30;         
 </programlisting>
                     </para>
                 </example>
@@ -957,7 +957,7 @@ ALTER DATABASE DROP LINGER;
                     <para>или</para>
                     <para>
                         <programlisting language="sql">  
-ALTER DATABASE SET LINGER 0;         
+ALTER DATABASE SET LINGER TO 0;         
 </programlisting>
                     </para>
                 </example>
